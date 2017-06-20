@@ -1,0 +1,18 @@
+<div>
+    <ul class="cb-slideshow">
+        <li><span>Image 01</span></li>
+        <li><span>Image 02</span></li>
+        <li><span>Image 03</span></li>
+        <li><span>Image 04</span></li>
+        <li><span>Image 05</span></li>
+    </ul>
+
+    <form role="form" ng-submit="model.search(location)">
+        <div class="input-group search-bar">
+            <input type="text" class="form-control search-box" placeholder="Search for a location..." autofocus="" ng-model="location">
+            <a class="input-group-addon search-box btn-primary btn-search" ng-click="model.search(location)">
+                <i class="glyphicon glyphicon-search"></i>
+            </a>
+        </div>
+    </form>
+</div>

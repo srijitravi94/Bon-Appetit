@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="BonAppetit">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" type="image/png" href="images/logo.jpg">
+
+
+    <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/slideshow.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+
+    <title>Bon Appétit</title>
+</head>
+<body>
+
+<div ui-view="header"></div>
+<div ui-view="content"></div>
+
+
+<!--Common Vendors-->
+<script src="js/vendor/jquery.min.js"></script> <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<script src="js/vendor/bootstrap.min.js"></script> <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<script src="js/vendor/angular.min.js"></script> <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>-->
+<script src="js/vendor/angular-ui-router.min.js"></script> <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>-->
+<script src="js/vendor/dirPagination.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJgnBXvOogRWQoF2ZF7214H6RSQ-gzuZk"></script>
+<script src="js/vendor/ng-map.min.js"></script>
+
+<!--Routes-->
+<script src="app.js"></script>
+<script src="config.js"></script>
+<script src="js/script.js"></script>
+
+<!--Controllers-->
+<script src="views/common/controllers/header.controller.client.js"></script>
+<script src="views/users/controllers/register.controller.client.js"></script>
+<script src="views/users/controllers/login.controller.client.js"></script>
+<script src="views/users/controllers/profile.controller.client.js"></script>
+<script src="views/main/controllers/main.controller.client.js"></script>
+<script src="views/location/controllers/location.results.controller.client.js"></script>
+<script src="views/location/controllers/location.collections.controller.client.js"></script>
+<script src="views/collections/controllers/restaurants.collections.controller.client.js"></script>
+<script src="views/restaurants/controllers/restaurant.results.controller.client.js"></script>
+<script src="views/restaurants/controllers/restaurant.details.controller.client.js"></script>
+
+<!--Services-->
+<script src="services/api.service.client.js"></script>
+<script src="services/user.service.client.js"></script>
+</body>
+</html>

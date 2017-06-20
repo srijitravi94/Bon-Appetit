@@ -1,0 +1,326 @@
+/* Header and Navigation*/
+
+#header-nav {
+    background-color: #191919 !important;
+    border: 0;
+    border-radius: 0;
+    margin-top: -20px;
+    height: auto;
+}
+
+.navbar-brand a{
+    color : #fec503 ;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+    text-decoration: none;
+}
+
+.navbar-brand a:hover,
+.navbar-brand a:focus,
+.navbar-brand a:active {
+    text-decoration: none;
+    color: #fec503;
+}
+
+#nav-list {
+    margin-top: -15px;
+    background-color: #191919;
+}
+
+#nav-list a{
+    color: #fec503 !important;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+#nav-list a:hover,
+#nav-list a:focus,
+#nav-list a:active {
+    text-decoration: none;
+    color: #fec503;
+}
+
+.navbar-header button.navbar-toggle , .navbar-header .icon-bar {
+    border : 1px solid #fec503;
+}
+
+.navbar-header button.navbar-toggle {
+    clear: both;
+    margin-top: -10px;
+}
+
+@media (max-width: 767px) {
+
+    #collapsable-nav {
+        border: none;
+    }
+
+    #nav-list a.login-header-element {
+        margin-top: 30px;
+    }
+
+    #nav-list a.profile-header-element {
+        margin-top: 30px;
+    }
+
+    .navbar-header button.navbar-toggle:hover,
+    .navbar-header button.navbar-toggle:focus,
+    .navbar-header button.navbar-toggle:active{
+        background-color: #333333;
+    }
+}
+
+/* Search bar for location */
+
+.search-bar {
+    padding-top: 300px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10%;
+}
+
+.search-bar-location {
+    padding-top: 100px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10%;
+}
+
+.search-box:hover{
+    border-color: transparent;
+}
+
+.register, .login {
+    margin-top: 15%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10%;
+}
+
+.profile {
+    margin-top: 10%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10%;
+}
+
+.login-header-element,
+.register-header-element,
+.profile-header-element{
+    margin-right: 20px;
+}
+
+.register-element, .login-element {
+    color: #191919;
+}
+
+.register-element:hover,
+.register-element:focus,
+.register-element:active,
+.login-element:hover,
+.login-element:focus,
+.login-element:active {
+    color: #191919;
+}
+
+.form-group .btn {
+    color : #fec503;
+    background-color: #191919;
+}
+
+.form-control:focus, .form-control:hover {
+    border-color: #fec503;
+}
+
+.form-group .btn:hover, .btn-search:hover {
+    background-color: #333333;
+}
+
+.form-group .btn:active {
+    outline: #333333;
+}
+
+.modal-button {
+    background-color: #333333;
+    color : #fec503;
+}
+
+.modal-button:focus, .modal-button:hover {
+    border-color: #fec503;
+}
+
+.modal-button:hover {
+    background-color: #333333;
+}
+
+.modal-button:active {
+    outline: #333333;
+}
+
+.search-box {
+    height : 50px;
+}
+
+a .glyphicon-search {
+    width: 30px;
+}
+
+@media (max-width: 767px) {
+    .search-bar {
+        padding-top: 200px;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 10%;
+    }
+
+    .search-bar-location {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 10%;
+    }
+
+    .register, .login {
+        padding-top: 5%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 10%;
+    }
+
+    .profile {
+        padding-top: 10%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 10%;
+    }
+}
+
+/* Location suggestions page and collections page*/
+.search-result-title, .collection-result-title {
+    margin-top: -5%;
+}
+
+li span.content {
+    font-style: italic;
+    color: #bb4100;
+}
+
+a.location-title {
+    color: #bb4100;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+    text-decoration: underline;
+}
+
+.pagination {
+    margin-left: 15px;
+}
+
+.pagination>li>a,
+.pagination>li>a:focus,
+.pagination>li>a:hover {
+    color: #bb4100;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:hover,
+.pagination>.active>a:focus {
+    background-color: #bb4100;
+    border-color: #bb4100;
+}
+
+.collection-image {
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto 30px;
+}
+
+.collection-image span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    background-color: #000000;
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.location-collection-image {
+    width: 100%;
+}
+
+/*Restaurants inside a collection*/
+
+.restaurant-collections-list, .restaurant-search-list{
+    margin-top: 100px;
+}
+
+.restaurant-collections-image, .restaurant-search-image {
+    width: 100%;
+    height: 200px;
+}
+
+.restaurant-list, .restaurant-collections-list, .restaurant-search-list {
+    margin-bottom: 50px;
+}
+
+.restaurant-name {
+    margin-top: 20px;
+    color: #bb4100;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.content {
+    color: #bb4100;
+    font-style: italic;
+}
+
+.restaurant-name a:hover,
+.restaurant-name a:focus,
+.restaurant-name a:active {
+    text-decoration: none;
+    color: #bb4100;
+}
+
+/*Restaurant Details*/
+
+.restaurant-details {
+    margin-top: 80px;
+}
+
+@media (max-width: 767px) {
+    .restaurant-details {
+        margin-top: 60px;
+    }
+}
+
+.restaurant-image {
+    margin-top: 30px;
+    width: 100%;
+    height: 250px;
+}
+
+.restaurant-details-page{
+    margin-top: 30px;
+}
+
+.restaurant-cuisines {
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.label-as-badge {
+    background-color: #bb4100;
+}
+
+div.restaurant-cost {
+    margin-top: 30px;
+}
+
+a.restaurant-menu {
+    color: #bb4100;
+
+}
+
+.restaurant-menu {
+    margin-bottom: 80px;
+}

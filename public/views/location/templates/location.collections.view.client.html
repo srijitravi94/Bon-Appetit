@@ -1,0 +1,30 @@
+<div>
+    <form role="form" ng-submit="model.searchRestaurant(restaurant)">
+        <div class="input-group search-bar-location">
+            <input type="text"
+                   class="form-control search-box"
+                   placeholder="Search for a restaurant in {{model.cityName}}..."
+                   autofocus=""
+                   ng-model="restaurant">
+            <a class="input-group-addon search-box btn-primary btn-search"
+               ng-click="model.searchRestaurant(restaurant)">
+                <i class="glyphicon glyphicon-search"></i>
+            </a>
+        </div>
+    </form>
+</div>
+
+
+<div class="container-fluid">
+    <h2 class="collection-result-title">All collections in the city of {{model.cityName}}...</h2>
+    <div ng-repeat="collection in model.collections">
+        <div class="col-md-3 col-sm-6 col-xxs-12">
+            <div class="collection-image">
+                <a ui-sref="index.restaurantCollections({cityName: model.cityName, cityId: model.cityId, collectionId: collection.collection_id})">
+                <img class="location-collection-image img-responsive" ng-src="{{collection.image_url}}" alt="{{collection.title}}">
+                <span>{{collection.title}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

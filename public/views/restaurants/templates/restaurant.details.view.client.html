@@ -1,0 +1,43 @@
+<div class="restaurant-details" ng-hide="model.restaurantDetails.location.latitude === '0.0000000000'">
+    <ng-map center="{{model.restaurantDetails.location.latitude}}, {{model.restaurantDetails.location.longitude}}">
+        <marker position="{{model.restaurantDetails.location.latitude}}, {{model.restaurantDetails.location.longitude}}"></marker>
+    </ng-map>
+</div>
+
+<div class="restaurant-details" ng-hide="model.restaurantDetails.location.latitude !== '0.0000000000'">
+    <ng-map center="{{model.restaurantDetails.location.address}}">
+        <marker position="{{model.restaurantDetails.location.address}}"></marker>
+    </ng-map>
+</div>
+
+<div class="container-fluid">
+    <div class="col-sm-4">
+        <div class="media-left media-middle">
+            <img class="restaurant-image media-object img-responsive"
+                 ng-hide="model.restaurantDetails.featured_image === ''"
+                 ng-src="{{model.restaurantDetails.featured_image}}"
+                 alt="{{model.restaurantDetails.name}}">
+            <img class="restaurant-image media-object img-responsive"
+                 ng-show="model.restaurantDetails.featured_image === ''"
+                 ng-src="https://digital-photography-school.com/wp-content/uploads/2016/06/Rachel-Korinek-Food-Photographer-DPS-Hero-Angle-12.jpg"
+                 alt="{{restaurant.name}}">
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="restaurant-details-page">
+            <h2 class="restaurant-name media-heading">{{model.restaurantDetails.name}}</h2>
+            <h3 class="restaurant-cuisines">
+                <span ng-repeat="cuisines in model.restaurantDetails.cuisines.split(',') | limitTo: 3">
+                    <span class="label label-default label-as-badge">
+                        {{cuisines}}
+                    </span>&nbsp;
+                </span>
+            </h3>
+            <div class="restaurant-cost"><span class="content">Cost for two </span>:&nbsp;&nbsp; {{model.restaurantDetails.currency}}{{model.restaurantDetails.average_cost_for_two}}</div>
+            <div class="restaurant-locality"><span class="content">Locality &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>:&nbsp;&nbsp; {{model.restaurantDetails.location.locality}}</div>
+            <div class="restaurant-city"><span class="content">City &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>:&nbsp;&nbsp; {{model.restaurantDetails.location.city}}</div>
+            <div class="restaurant-address"><span class="content">Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>:&nbsp;&nbsp; {{model.restaurantDetails.location.address}}</div><br><br>
+            <div class="restaurant-menu"><a ng-if="model.restaurantDetails.name" class="restaurant-menu" href="{{model.restaurantDetails.menu_url}}" target="_blank">Checkout the menu for {{model.restaurantDetails.name}}</a></div>
+        </div>
+    </div>
+</div>

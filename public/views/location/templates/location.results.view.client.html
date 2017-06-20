@@ -1,0 +1,31 @@
+<div>
+    <form role="form" ng-submit="model.search(location)">
+        <div class="input-group search-bar-location">
+            <input type="text" class="form-control search-box" placeholder="Search for a location..." autofocus="" ng-model="location">
+            <a class="input-group-addon search-box btn-primary btn-search" ng-click="model.search(location)">
+                <i class="glyphicon glyphicon-search"></i>
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid">
+    <h2 class="search-result-title">Search results for {{model.location}}...</h2>
+</div>
+
+<div class="container-fluid">
+    <ul class="media-list">
+        <li class="media" dir-paginate="suggestion in model.suggestions | itemsPerPage:5">
+            <h4 class="media-heading"><a class="location-title" ui-sref="index.collections({cityName: suggestion.city_name, cityId: suggestion.city_id})">{{suggestion.title}}</a></h4>
+            <span class=""> <span class="content">Type &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>: &nbsp; {{suggestion.entity_type | uppercase}}<br></span>
+            <span class=""> <span class="content">City &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>: &nbsp; {{suggestion.city_name}}<br></span>
+            <span class=""> <span class="content">Country &nbsp;</span>: &nbsp; {{suggestion.country_name}}<br></span>
+        </li>
+    </ul>
+</div>
+
+<dir-pagination-controls
+        max-size="10"
+        direction-links="true"
+        boundary-links="true">
+</dir-pagination-controls>

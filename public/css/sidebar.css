@@ -1,3 +1,4 @@
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -18,11 +19,11 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    overflow: hidden;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -107,11 +108,11 @@
 
     #page-content-wrapper {
         padding: 20px;
-        position: relative;
+        position: fixed;
     }
 
     #wrapper.toggled #page-content-wrapper {
-        position: relative;
+        position: fixed;
         margin-right: 0;
     }
 }

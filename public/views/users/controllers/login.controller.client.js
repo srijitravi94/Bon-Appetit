@@ -3,11 +3,9 @@
         .module("BonAppetit")
         .controller("loginController", loginController);
 
-    function loginController(userService, $location) {
+    function loginController(userService, $location, $window) {
         var model = this;
         model.login = login;
-
-
 
         function login(username, password) {
 
@@ -28,8 +26,8 @@
             function foundUser(user) {
                 if(user !== null) {
                     userService.currentUser = user;
+                    $window.location.reload();
                     $location.url('/profile');
-                    $route.reload();
                 }
             }
 

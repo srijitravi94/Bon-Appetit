@@ -3,7 +3,7 @@
         .module('BonAppetit')
         .controller('registerController',registerController);
 
-    function registerController(userService, $location) {
+    function registerController(userService, $location, $window) {
 
         var model = this;
         model.register = register;
@@ -53,6 +53,7 @@
                 return userService
                     .register(newUser)
                     .then(function (user) {
+                        $window.location.reload();
                         $location.url('/profile');
                     });
             }

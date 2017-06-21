@@ -97,7 +97,7 @@
 }
 
 .profile {
-    margin-top: 10%;
+    margin-top: 20px;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 10%;
@@ -186,7 +186,6 @@ a .glyphicon-search {
     }
 
     .profile {
-        padding-top: 10%;
         margin-left: 10%;
         margin-right: 10%;
         margin-bottom: 10%;
@@ -323,4 +322,60 @@ a.restaurant-menu {
 
 .restaurant-menu {
     margin-bottom: 80px;
+}
+
+.profile-menu {
+    margin-top: 80px;
+    background-color: #191919;
+    color : #fec503;
+}
+
+.glyphicon-menu-right, .glyphicon-menu-left {
+    font-size: 30px;
+}
+
+a.profile-menu:hover,
+a.profile-menu:focus,
+a.profile-menu:active {
+    background-color: #191919;
+    color : #fec503;
+}
+
+.sidebar-nav {
+    margin-top: 80px;
+}
+
+@media (max-width: 767px) {
+    .profile-menu {
+        margin-top: 60px;
+    }
+}
+
+.gly, .sidebar-menu {
+    color: #fec503;
+}
+
+#sidebar-wrapper {
+    background-color: #191919;
+}
+
+.glyphicon-before {
+    color : black;
+}
+
+.glyphicon-after {
+    color: green;
+}
+
+.restaurant-review {
+    margin-top: -30px;
+    margin-bottom: 50px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+}
+
+.test {
+    margin-top: 100px;
 }

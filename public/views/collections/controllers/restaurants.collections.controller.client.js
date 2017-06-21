@@ -26,7 +26,6 @@
                         restaurants.push(restaurantCollections[r].restaurant);
                     }
                     model.restaurants = restaurants;
-                    console.log(model.restaurants)
                 });
         }
     }

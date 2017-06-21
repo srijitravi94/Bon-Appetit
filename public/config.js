@@ -70,6 +70,51 @@
                 }
             })
 
+            //route for user likes
+            .state("index.likes", {
+                url : "profile/likes",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/users/templates/profile.likes.view.client.html",
+                        controller : "likesController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkLoggedIn
+                }
+            })
+
+            //route for user visited
+            .state("index.visited", {
+                url : "profile/visited",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/users/templates/profile.visited.view.client.html",
+                        controller : "visitedController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkLoggedIn
+                }
+            })
+
+            //route for user reviews
+            .state("index.reviews", {
+                url : "profile/reviews",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/users/templates/profile.reviews.view.client.html",
+                        controller : "reviewController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkLoggedIn
+                }
+            })
+
             //route for location search results page
             .state("index.location", {
                 url:"search/:location",
@@ -127,6 +172,9 @@
                         controller: "restaurantDetailsController",
                         controllerAs: "model"
                     }
+                },
+                resolve : {
+                    getLoggedIn : getLoggedIn
                 }
             });
 

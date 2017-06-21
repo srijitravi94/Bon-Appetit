@@ -15,7 +15,13 @@
            login : login,
            loggedin : loggedin,
            register : register,
-           logout : logout
+           logout : logout,
+           likeRestaurant : likeRestaurant,
+           unLikeRestaurant : unLikeRestaurant,
+           isRestaurantLiked : isRestaurantLiked,
+           visited : visited,
+           undoVisited : undoVisited,
+           haveBeenThere : haveBeenThere
        };
 
        return api;
@@ -101,6 +107,54 @@
            return $http.post(url)
                .then(function (response) {
                    return response.data;
+               });
+       }
+
+       function likeRestaurant(resId, userId) {
+           var url = "/api/project/user/" +userId+ "/restaurant/like/" +resId;
+           return $http.put(url)
+               .then(function (response) {
+                  return response.data;
+               });
+       }
+
+       function unLikeRestaurant(resId, userId) {
+           var url = "/api/project/user/" +userId+ "/restaurant/unlike/" +resId;
+           return $http.put(url)
+               .then(function (response) {
+                   return response.data;
+               });
+       }
+
+       function isRestaurantLiked(resId, userId) {
+           var url = "/api/project/user/" +userId+ "/restaurant/like/" +resId;
+           return $http.get(url)
+               .then(function (response) {
+                  return response.data;
+               });
+       }
+
+       function visited(resId, userId) {
+           var url = "/api/project/user/" +userId+ "/restaurant/visited/" +resId;
+           return $http.put(url)
+               .then(function (response) {
+                   return response.data;
+               });
+       }
+
+       function undoVisited(resId, userId) {
+           var url = "/api/project/user/" +userId+ "/restaurant/undoVisited/" +resId;
+           return $http.put(url)
+               .then(function (response) {
+                   return response.data;
+               });
+       }
+
+       function haveBeenThere(resId, userId) {
+           var url = "/api/project/user/" +userId+ "/restaurant/visited/" +resId;
+           return $http.get(url)
+               .then(function (response) {
+                    return response.data;
                });
        }
    }

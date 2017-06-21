@@ -12,6 +12,12 @@ app.post('/api/project/user', createUser);
 app.get('/api/project/user/:userId', findUserById);
 app.put('/api/project/user/:userId', updateUser);
 app.delete('/api/project/user/:userId', deleteUser);
+app.put('/api/project/user/:userId/restaurant/like/:resId', likeRestaurant);
+app.put('/api/project/user/:userId/restaurant/unlike/:resId', unLikeRestaurant);
+app.get('/api/project/user/:userId/restaurant/like/:resId', isRestaurantLiked);
+app.put('/api/project/user/:userId/restaurant/visited/:resId', visited);
+app.put('/api/project/user/:userId/restaurant/undoVisited/:resId', undoVisited);
+app.get('/api/project/user/:userId/restaurant/visited/:resId', haveBeenThere);
 
 app.post('/api/project/login', passport.authenticate('local'), login);
 app.get('/api/project/loggedin', loggedin);
@@ -163,4 +169,82 @@ function register(req, res) {
 function logout(req, res) {
     req.logout();
     res.sendStatus(200);
+}
+
+function likeRestaurant(req, res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+
+    userModel
+        .likeRestaurant(userId, resId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function unLikeRestaurant(req, res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+
+    userModel
+        .unLikeRestaurant(userId, resId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function isRestaurantLiked(req, res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+
+    userModel
+        .isRestaurantLiked(userId, resId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function visited(req, res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+
+    userModel
+        .visited(userId, resId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function undoVisited(req, res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+
+    userModel
+        .undoVisited(userId, resId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function haveBeenThere(req, res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+
+    userModel
+        .haveBeenThere(userId, resId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }

@@ -25,7 +25,38 @@
     </div>
     <div class="col-sm-8">
         <div class="restaurant-details-page">
-            <h2 class="restaurant-name media-heading">{{model.restaurantDetails.name}}</h2>
+            <h2 class="restaurant-name media-heading">{{model.restaurantDetails.name}} &nbsp;
+
+                <a ng-show="model.getLoggedIn._id"
+                   ng-click="model.likeRestaurant(model.restaurantDetails.id)">
+                    <i ng-if="!model.isLiked"
+                       class="glyphicon-before glyphicon glyphicon-thumbs-up">
+                    </i>
+                </a>
+
+                <a ng-show="model.getLoggedIn._id"
+                   ng-click="model.unLikeRestaurant(model.restaurantDetails.id)">
+                    <i ng-if="model.isLiked"
+                       class="glyphicon-after glyphicon glyphicon-thumbs-up">
+                    </i>
+                </a>
+
+                <a ng-show="model.getLoggedIn._id"
+                   ng-click="model.visited(model.restaurantDetails.id)">
+                    <i ng-if="!model.been"
+                       class="glyphicon-before glyphicon glyphicon-map-marker">
+                    </i>
+                </a>
+
+                <a ng-show="model.getLoggedIn._id"
+                   ng-click="model.undoVisited(model.restaurantDetails.id)">
+                    <i ng-if="model.been"
+                       class="glyphicon-after glyphicon glyphicon-map-marker">
+                    </i>
+                </a>
+
+            </h2>
+
             <h3 class="restaurant-cuisines">
                 <span ng-repeat="cuisines in model.restaurantDetails.cuisines.split(',') | limitTo: 3">
                     <span class="label label-default label-as-badge">
@@ -39,5 +70,43 @@
             <div class="restaurant-address"><span class="content">Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>:&nbsp;&nbsp; {{model.restaurantDetails.location.address}}</div><br><br>
             <div class="restaurant-menu"><a ng-if="model.restaurantDetails.name" class="restaurant-menu" href="{{model.restaurantDetails.menu_url}}" target="_blank">Checkout the menu for {{model.restaurantDetails.name}}</a></div>
         </div>
+    </div>
+</div>
+
+<div class="container-fluid" ng-show="model.getLoggedIn._id">
+    <div class="col-xs-12 col-sm-8 restaurant-review">
+        <div ng-repeat="reviews in model.reviews">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h1>{{reviews.summary}}</h1>
+                    <p>{{reviews.description}}</p>
+                    <p>{{reviews.firstName}} {{reviews.lastName}}</p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid" ng-show="model.getLoggedIn._id">
+    <div class="col-xs-12 col-sm-8 restaurant-review">
+        <label for="summary">Summary</label>
+        <input class="form-control"
+               ng-model="summary"
+               placeholder="Review Summary"
+               id="summary"/>
+
+        <label for="description">Description</label>
+        <textarea id="description"
+                  ng-model="description"
+                  rows="8"
+                  placeholder="Detailed description"
+                  class="form-control"></textarea>
+
+        <a ng-click="model.createReview(summary, description); summary=null; description=null;"
+           class="submit-btn btn btn-primary btn-success">
+            Submit
+        </a>
     </div>
 </div>

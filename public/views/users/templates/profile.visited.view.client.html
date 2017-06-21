@@ -1,0 +1,90 @@
+<div id="wrapper" data-spy="scroll" data-target="#sidebar-wrapper">
+
+    <div id="sidebar-wrapper" data-spy="affix">
+        <ul class="sidebar-nav">
+            <li>
+                <a ui-sref="index.profile">
+                    <i class="gly glyphicon glyphicon-cog"></i>&nbsp;&nbsp;
+                    <b><span class="sidebar-menu">Edit Profile</span></b>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="index.likes">
+                    <i class="gly glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;
+                    <b><span class="sidebar-menu">Likes</span></b>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="index.visited">
+                    <i class="gly glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;
+                    <b><span class="sidebar-menu">Visited</span></b>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
+                    <b><span class="sidebar-menu">Followers</span></b>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
+                    <b><span class="sidebar-menu">Following</span></b>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="index.reviews">
+                    <i class="gly glyphicon glyphicon-comment"></i>&nbsp;&nbsp;
+                    <b><span class="sidebar-menu">Reviews</span></b>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <a href="#menu-toggle"
+       id="menu-toggle"
+       class="profile-menu btn btn-default">
+        <i class="glyphicon glyphicon-menu-right"></i>
+    </a>
+
+    <div class="restaurant-search-list">
+        <ul class="media-list">
+            <li class="media restaurant-list" dir-paginate="restaurant in model.restaurants | itemsPerPage:5">
+                <div class="col-sm-4">
+                    <div class="media-left media-middle">
+                        <a ui-sref="index.restaurantDetails({cityName : restaurant.location.city, cityId : restaurant.location.city_id, restaurantId : restaurant.id})">
+                            <img ng-hide="restaurant.featured_image === ''"
+                                 class="media-object img-responsive restaurant-search-image"
+                                 ng-src="{{restaurant.featured_image}}" alt="{{restaurant.name}}">
+                            <img class="media-object img-responsive restaurant-search-image"
+                                 ng-show="restaurant.featured_image === ''"
+                                 ng-src="https://digital-photography-school.com/wp-content/uploads/2016/06/Rachel-Korinek-Food-Photographer-DPS-Hero-Angle-12.jpg"
+                                 alt="{{restaurant.name}}"></a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="media-body restaurant-details">
+                        <h2 class="restaurant-name media-heading"><a class="restaurant-name" ui-sref="index.restaurantDetails({cityName : restaurant.location.city, cityId : restaurant.location.city_id, restaurantId : restaurant.id})">{{restaurant.name}}</a></h2>
+                        <span><span class="content"> Locality &nbsp;</span>: &nbsp; {{restaurant.location.locality}}</span><br>
+                        <span><span class="content"> City &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>: &nbsp; {{restaurant.location.city}}</span>
+                    </div>
+                </div>
+            </li>
+            <dir-pagination-controls
+                    max-size="10"
+                    direction-links="true"
+                    boundary-links="true">
+            </dir-pagination-controls>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $(this).find('i').toggleClass('glyphicon-menu-right').toggleClass('glyphicon-menu-left');
+    });
+</script>
+
+

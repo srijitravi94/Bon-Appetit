@@ -78,6 +78,7 @@
         <div ng-repeat="reviews in model.reviews">
             <ul class="list-group">
                 <li class="list-group-item">
+                    <i ng-show="model.getLoggedIn._id === reviews.userId" class="pull-right glyphicon glyphicon-cog"></i>&nbsp;
                     <h1>{{reviews.summary}}</h1>
                     <p>{{reviews.description}}</p>
                     <p>{{reviews.firstName}} {{reviews.lastName}}</p>

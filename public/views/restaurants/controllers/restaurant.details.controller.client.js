@@ -17,7 +17,6 @@
         model.isRestaurantLiked = isRestaurantLiked;
         model.haveBeenThere = haveBeenThere;
 
-
         function init() {
             restaurantDetails();
             isRestaurantLiked();

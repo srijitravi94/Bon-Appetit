@@ -1,45 +1,6 @@
 <div id="wrapper" data-spy="scroll" data-target="#sidebar-wrapper">
 
-    <div id="sidebar-wrapper" data-spy="affix">
-        <ul class="sidebar-nav">
-            <li>
-                <a ui-sref="index.profile">
-                    <i class="gly glyphicon glyphicon-cog"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Edit Profile</span></b>
-                </a>
-            </li>
-            <li>
-                <a ui-sref="index.likes">
-                    <i class="gly glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Likes</span></b>
-                </a>
-            </li>
-            <li>
-                <a ui-sref="index.visited">
-                    <i class="gly glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Visited</span></b>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Followers</span></b>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Following</span></b>
-                </a>
-            </li>
-            <li>
-                <a ui-sref="index.reviews">
-                    <i class="gly glyphicon glyphicon-comment"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Reviews</span></b>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <div ng-include="'views/users/templates/profile/sidebar.profile.view.client.html'"></div>
 
     <a href="#menu-toggle"
        id="menu-toggle"

@@ -1,6 +1,8 @@
 var app           = require('../../express');
 var passport      = require('passport');
 var userModel     = require('../models/user/user.model.server');
+var multer = require('multer');
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
 var LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(localStrategy));
@@ -18,6 +20,10 @@ app.get('/api/project/user/:userId/restaurant/like/:resId', isRestaurantLiked);
 app.put('/api/project/user/:userId/restaurant/visited/:resId', visited);
 app.put('/api/project/user/:userId/restaurant/undoVisited/:resId', undoVisited);
 app.get('/api/project/user/:userId/restaurant/visited/:resId', haveBeenThere);
+app.put('/api/project/user/:currentUserId/follow/:followUserId', followUsers);
+app.put('/api/project/user/:currentUserId/unfollow/:unfollowUserId', unfollowUsers);
+app.get('/api/project/user/:currentUserId/follow/:followUserId', isUserFollowed);
+app.post ("/api/project/upload", upload.single('myFile'), uploadImage);
 
 app.post('/api/project/login', passport.authenticate('local'), login);
 app.get('/api/project/loggedin', loggedin);
@@ -160,8 +166,12 @@ function register(req, res) {
     userModel
         .createUser(newUser)
         .then(function (user) {
-           req.login(user, function (status) {
-              res.send(status);
+           req.login(user, function (err) {
+               if (err) {
+                   res.sendStatus(404)
+               } else {
+                   res.json(user);
+               }
            });
         });
 }
@@ -247,4 +257,70 @@ function haveBeenThere(req, res) {
         }, function (err) {
             res.sendStatus(404);
         });
+}
+
+function followUsers(req, res) {
+    var currentUserId = req.params.currentUserId;
+    var followUserId  = req.params.followUserId;
+
+    userModel
+        .followUsers(currentUserId, followUserId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function unfollowUsers(req, res) {
+    var currentUserId = req.params.currentUserId;
+    var unfollowUserId  = req.params.unfollowUserId;
+
+    userModel
+        .unfollowUsers(currentUserId, unfollowUserId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function isUserFollowed(req, res) {
+    var currentUserId = req.params.currentUserId;
+    var followUserId  = req.params.followUserId;
+
+    userModel
+        .isUserFollowed(currentUserId, followUserId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function uploadImage(req, res) {
+
+    var myFile        = req.file;
+    var userId        = req.body.userId;
+
+    var originalname  = myFile.originalname;
+    var filename      = myFile.filename;
+    var path          = myFile.path;
+    var destination   = myFile.destination;
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+
+    userModel
+        .findUserById(userId)
+        .then(function (user) {
+            user.image = '/uploads/' +filename;
+            userModel
+                .updateUser(user, userId)
+                .then(function () {
+                    res.redirect("/#/profile/" +userId);
+                });
+        });
+
+
 }

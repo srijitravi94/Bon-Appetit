@@ -11,11 +11,11 @@
         model.getLoggedIn = getLoggedIn;
         model.likeRestaurant = likeRestaurant;
         model.unLikeRestaurant = unLikeRestaurant;
+        model.isRestaurantLiked = isRestaurantLiked;
         model.visited = visited;
         model.undoVisited = undoVisited;
-        model.createReview = createReview;
-        model.isRestaurantLiked = isRestaurantLiked;
         model.haveBeenThere = haveBeenThere;
+        model.createReview = createReview;
 
         function init() {
             restaurantDetails();
@@ -70,7 +70,6 @@
                 .isRestaurantLiked(model.restaurantId, model.getLoggedIn._id)
                 .then(function (user) {
                     if (user) {
-                        console.log(user);
                         model.isLiked = true;
                     }
                     else {
@@ -135,6 +134,7 @@
                         userId      : model.getLoggedIn._id,
                         firstName   : model.getLoggedIn.firstName,
                         lastName    : model.getLoggedIn.lastName,
+                        profilePic  : model.getLoggedIn.image,
                         summary     : summary,
                         description : description
                     }

@@ -57,10 +57,10 @@
 
             //route for profile page
             .state("index.profile", {
-                url : "profile",
+                url : "profile/:userId",
                 views : {
                     "content@" : {
-                        templateUrl : "views/users/templates/profile.view.client.html",
+                        templateUrl : "views/users/templates/profile/profile.view.client.html",
                         controller : "profileController",
                         controllerAs : "model"
                     }
@@ -72,10 +72,10 @@
 
             //route for user likes
             .state("index.likes", {
-                url : "profile/likes",
+                url : "profile/:userId/likes",
                 views : {
                     "content@" : {
-                        templateUrl : "views/users/templates/profile.likes.view.client.html",
+                        templateUrl : "views/users/templates/profile/profile.likes.view.client.html",
                         controller : "likesController",
                         controllerAs : "model"
                     }
@@ -87,11 +87,41 @@
 
             //route for user visited
             .state("index.visited", {
-                url : "profile/visited",
+                url : "profile/:userId/visited",
                 views : {
                     "content@" : {
-                        templateUrl : "views/users/templates/profile.visited.view.client.html",
+                        templateUrl : "views/users/templates/profile/profile.visited.view.client.html",
                         controller : "visitedController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkLoggedIn
+                }
+            })
+
+            //route for user followers
+            .state("index.followers", {
+                url : "profile/:userId/followers",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/users/templates/profile/profile.followers.view.client.html",
+                        controller : "followerController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkLoggedIn
+                }
+            })
+
+            //route for user following
+            .state("index.following", {
+                url : "profile/:userId/following",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/users/templates/profile/profile.following.view.client.html",
+                        controller : "followingController",
                         controllerAs : "model"
                     }
                 },
@@ -102,10 +132,10 @@
 
             //route for user reviews
             .state("index.reviews", {
-                url : "profile/reviews",
+                url : "profile/:userId/reviews",
                 views : {
                     "content@" : {
-                        templateUrl : "views/users/templates/profile.reviews.view.client.html",
+                        templateUrl : "views/users/templates/profile/profile.reviews.view.client.html",
                         controller : "reviewController",
                         controllerAs : "model"
                     }
@@ -199,7 +229,7 @@
         return deferred.promise;
     }
 
-    function getLoggedIn(userService, $q, $location) {
+    function getLoggedIn(userService, $q) {
         var deferred = $q.defer();
 
         userService

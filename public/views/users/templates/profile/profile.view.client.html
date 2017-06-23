@@ -1,52 +1,12 @@
 <div id="wrapper" data-spy="scroll" data-target="#sidebar-wrapper">
 
-    <div id="sidebar-wrapper" data-spy="affix">
-        <ul class="sidebar-nav">
-            <li>
-                <a ui-sref="index.profile">
-                    <i class="gly glyphicon glyphicon-cog"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Edit Profile</span></b>
-                </a>
-            </li>
-            <li>
-                <a ui-sref="index.likes">
-                    <i class="gly glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Likes</span></b>
-                </a>
-            </li>
-            <li>
-                <a ui-sref="index.visited">
-                    <i class="gly glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Visited</span></b>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Followers</span></b>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Following</span></b>
-                </a>
-            </li>
-            <li>
-                <a ui-sref="index.reviews">
-                    <i class="gly glyphicon glyphicon-comment"></i>&nbsp;&nbsp;
-                    <b><span class="sidebar-menu">Reviews</span></b>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <div ng-include="'views/users/templates/profile/sidebar.profile.view.client.html'"></div>
 
     <a href="#menu-toggle"
        id="menu-toggle"
        class="profile-menu btn btn-default">
         <i class="glyphicon glyphicon-menu-right"></i>
     </a>
-
 
     <div class="container-fluid profile">
 
@@ -68,61 +28,110 @@
 
             <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input type="text"
-                       ng-model="model.user.firstName"
-                       class="form-control"
-                       id="first-name"
-                       placeholder="Alice">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-option-horizontal"></i>
+                    </span>
+                    <input type="text"
+                           id="first-name"
+                           class="form-control"
+                           placeholder="First Name"
+                           ng-model="model.user.firstName">
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input type="text"
-                       ng-model="model.user.lastName"
-                       class="form-control"
-                       id="last-name"
-                       placeholder="Wonderland">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-option-horizontal"></i>
+                    </span>
+                    <input type="text"
+                           id="last-name"
+                           class="form-control"
+                           placeholder="Last Name"
+                           ng-model="model.user.lastName">
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text"
-                       ng-model="model.user.username"
-                       class="form-control"
-                       id="username"
-                       placeholder="alice" disabled>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    <input type="text"
+                           id="username"
+                           class="form-control"
+                           placeholder="Username"
+                           ng-model="model.user.username"
+                           disabled>
+                </div>
             </div>
 
-            <div class="form-group">
+            <div ng-if="model.userId === model.currentUser._id" class="form-group">
                 <label for="password">Password</label>
-                <input type="password"
-                       ng-model="model.user.password"
-                       class="form-control"
-                       id="password"
-                       placeholder="alice@123">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                    <input type="password"
+                           id="password"
+                           class="form-control"
+                           placeholder="Password"
+                           ng-model="model.user.password">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email"
-                       ng-model="model.user.email"
-                       class="form-control"
-                       id="email"
-                       placeholder="alice@wonderland.com">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </span>
+                    <input type="text"
+                           id="email"
+                           class="form-control"
+                           placeholder="Email address"
+                           ng-model="model.user.email">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="tel"
-                       ng-model="model.user.phone"
-                       class="form-control"
-                       id="phone"
-                       placeholder="7492648910">
+                <label for="phone">Email</label>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-earphone"></i>
+                    </span>
+                    <input type="tel"
+                           id="phone"
+                           class="form-control"
+                           placeholder="Phone number"
+                           ng-model="model.user.phone">
+                </div>
             </div>
 
         </form>
 
-        <div class="form-group">
+        <div ng-if="model.userId === model.currentUser._id" class="form-group">
+            <label for="image">Upload Image</label>
+            <form action="/api/project/upload" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-upload"></i>
+                            </span>
+                    <input name="myFile"
+                           type="file"
+                           id="image"
+                           class="form-control" />
+                    <input  name="userId" value="{{model.currentUser._id}}" style="display: none"/>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary upload">Upload Image</button>
+            </form>
+        </div>
+
+        <div ng-if="model.userId === model.currentUser._id"
+             class="form-group">
             <a class="btn btn-block btn-primary"
                data-toggle="modal"
                data-target="#updateModal">
@@ -130,7 +139,8 @@
             </a>
         </div>
 
-        <div class="form-group">
+        <div ng-if="model.userId === model.currentUser._id"
+             class="form-group">
             <a class="btn btn-block btn-primary"
                data-toggle="modal"
                data-target="#deleteModal">
@@ -138,7 +148,8 @@
             </a>
         </div>
 
-        <div class="form-group">
+        <div ng-if="model.userId === model.currentUser._id"
+             class="form-group">
             <a ng-click="model.logout()"
                class="btn btn-block btn-primary">
                 Logout

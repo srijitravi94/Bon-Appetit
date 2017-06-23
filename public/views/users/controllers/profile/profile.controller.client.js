@@ -3,15 +3,20 @@
         .module('BonAppetit')
         .controller('profileController',profileController);
 
-    function profileController(userService, currentUser, $location, $timeout, $window) {
+    function profileController(userService, $stateParams, currentUser, $location, $timeout, $window) {
         var model = this;
-        model.userId = currentUser._id;
+        model.userId = $stateParams.userId;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.currentUser = currentUser;
+        model.follow = follow;
+        model.unfollow = unfollow;
+        model.isUserFollowed = isUserFollowed;
         model.logout = logout;
 
         function init() {
             renderUser(currentUser);
+            isUserFollowed();
         } init();
 
         userService
@@ -67,6 +72,38 @@
                     $timeout( function() {
                         $location.url('/login');
                     }, 1000);
+                });
+        }
+
+        function follow(followUserId) {
+            userService
+                .followUsers(model.currentUser._id, followUserId)
+                .then(function (user) {
+                   model.isFollow = true;
+                }, function (err) {
+                    console.log(err);
+                });
+        }
+
+        function unfollow(unfollowUserId) {
+            userService
+                .unfollowUsers(model.currentUser._id, unfollowUserId)
+                .then(function (user) {
+                    model.isFollow = false;
+                }, function (err) {
+                    console.log(err);
+                });
+        }
+
+        function isUserFollowed() {
+            userService
+                .isUserFollowed(model.currentUser._id, model.userId)
+                .then(function (user) {
+                    if(user) {
+                        model.isFollow = true;
+                    } else {
+                        model.isFollow = false;
+                    }
                 });
         }
     }

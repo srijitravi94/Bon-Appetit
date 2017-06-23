@@ -21,8 +21,6 @@
                     var restaurants = [];
                     var restaurantResults = response.data.restaurants;
 
-                    console.log(response);
-
                     for(var r in restaurantResults) {
                         restaurants.push(restaurantResults[r].restaurant);
                     }

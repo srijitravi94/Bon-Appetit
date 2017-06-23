@@ -25,9 +25,8 @@
 
             function foundUser(user) {
                 if(user !== null) {
-                    userService.currentUser = user;
                     $window.location.reload();
-                    $location.url('/profile');
+                    $location.url('/profile/' +user._id );
                 }
             }
 

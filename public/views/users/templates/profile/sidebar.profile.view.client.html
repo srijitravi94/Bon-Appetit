@@ -1,0 +1,60 @@
+<div id="sidebar-wrapper" data-spy="affix">
+    <ul class="sidebar-nav">
+        <li ng-controller="sidebarController as model">
+            <img class="profile-picture"
+                 ng-src="{{model.user.image}}">
+        </li>
+        <li ng-if="model.userId !== model.currentUser._id"
+            class="follow">
+            <button ng-show="!model.isFollow"
+                    class=" btn btn-primary btn-success"
+                    ng-click="model.follow(model.userId)">
+                FOLLOW
+            </button>
+        </li>
+        <li ng-if="model.userId !== model.currentUser._id"
+            class="follow">
+            <button ng-show="model.isFollow"
+                    class=" btn btn-primary btn-danger"
+                    ng-click="model.unfollow(model.userId)">
+                UNFOLLOW
+            </button>
+        </li>
+        <li>
+            <a ui-sref="index.profile({userId: model.userId})">
+                <i class="gly glyphicon glyphicon-cog"></i>&nbsp;&nbsp;
+                <b><span class="sidebar-menu">Profile</span></b>
+            </a>
+        </li>
+        <li>
+            <a ui-sref="index.likes({userId: model.userId})">
+                <i class="gly glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;
+                <b><span class="sidebar-menu">Likes</span></b>
+            </a>
+        </li>
+        <li>
+            <a ui-sref="index.visited({userId: model.userId})">
+                <i class="gly glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;
+                <b><span class="sidebar-menu">Visited</span></b>
+            </a>
+        </li>
+        <li>
+            <a ui-sref="index.followers({userId: model.userId})">
+                <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
+                <b><span class="sidebar-menu">Followers</span></b>
+            </a>
+        </li>
+        <li>
+            <a ui-sref="index.following({userId: model.userId})">
+                <i class="gly glyphicon glyphicon-user"></i>&nbsp;&nbsp;
+                <b><span class="sidebar-menu">Following</span></b>
+            </a>
+        </li>
+        <li>
+            <a ui-sref="index.reviews({userId: model.userId})">
+                <i class="gly glyphicon glyphicon-comment"></i>&nbsp;&nbsp;
+                <b><span class="sidebar-menu">Reviews</span></b>
+            </a>
+        </li>
+    </ul>
+</div>

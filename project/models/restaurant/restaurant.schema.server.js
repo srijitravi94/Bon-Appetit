@@ -11,6 +11,7 @@ var restaurantSchema = mongoose.Schema({
             userId      : String,
             firstName   : String,
             lastName    : String,
+            profilePic  : String,
             summary     : String,
             description : String,
             dateCreated : {type : Date, default: Date.now}

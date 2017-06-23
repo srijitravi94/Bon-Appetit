@@ -15,11 +15,15 @@ userModel.isRestaurantLiked = isRestaurantLiked;
 userModel.visited = visited;
 userModel.undoVisited = undoVisited;
 userModel.haveBeenThere = haveBeenThere;
+userModel.followUsers = followUsers;
+userModel.unfollowUsers = unfollowUsers;
+userModel.isUserFollowed = isUserFollowed;
 userModel.addReviewsForUser = addReviewsForUser;
 
 module.exports = userModel;
 
 function createUser(user) {
+    user.image = "https://www.drupal.org/files/issues/default-avatar.png";
     return userModel
         .create(user);
 }
@@ -82,6 +86,29 @@ function undoVisited(userId, resId) {
 function haveBeenThere(userId, resId) {
     return userModel
         .findOne({_id: userId, visited: {$in: [resId]}});
+}
+
+function followUsers(currentUserId, followUserId) {
+    return userModel
+        .update({_id: currentUserId}, {$addToSet: {following: followUserId}})
+        .then(function (user) {
+           return userModel
+               .update({_id: followUserId}, {$addToSet: {followers: currentUserId}});
+        });
+}
+
+function unfollowUsers(currentUserId, unfollowUserId) {
+    return userModel
+        .update({_id: currentUserId}, {$pullAll: {following: [unfollowUserId]}})
+        .then(function (user) {
+            return userModel
+                .update({_id: unfollowUserId}, {$pullAll: {followers: [currentUserId]}});
+        });
+}
+
+function isUserFollowed(currentUserId, followUserId) {
+    return userModel
+        .findOne({_id: currentUserId, following: {$in: [followUserId]}});
 }
 
 function addReviewsForUser(userId, review) {

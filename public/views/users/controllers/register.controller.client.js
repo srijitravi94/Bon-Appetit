@@ -53,8 +53,9 @@
                 return userService
                     .register(newUser)
                     .then(function (user) {
+                        console.log(user);
                         $window.location.reload();
-                        $location.url('/profile');
+                        $location.url('/profile/' + user._id);
                     });
             }
 

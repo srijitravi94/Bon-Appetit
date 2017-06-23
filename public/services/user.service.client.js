@@ -21,7 +21,10 @@
            isRestaurantLiked : isRestaurantLiked,
            visited : visited,
            undoVisited : undoVisited,
-           haveBeenThere : haveBeenThere
+           haveBeenThere : haveBeenThere,
+           followUsers : followUsers,
+           unfollowUsers : unfollowUsers,
+           isUserFollowed : isUserFollowed
        };
 
        return api;
@@ -98,6 +101,7 @@
            var url = "/api/project/register";
            return $http.post(url, newUser)
                .then(function (response) {
+                   console.log(response.data);
                    return response.data;
                });
        }
@@ -155,6 +159,32 @@
            return $http.get(url)
                .then(function (response) {
                     return response.data;
+               });
+       }
+
+       function followUsers(currentUserId, followUserId) {
+           var url = "/api/project/user/" +currentUserId+ "/follow/" +followUserId;
+
+           return $http.put(url)
+               .then(function (response) {
+                   return response.data;
+               });
+       }
+
+       function unfollowUsers(currentUserId, unfollowUserId) {
+           var url = "/api/project/user/" +currentUserId+ "/unfollow/" +unfollowUserId;
+
+           return $http.put(url)
+               .then(function (response) {
+                   return response.data;
+               });
+       }
+
+       function isUserFollowed(currentUserId, followUserId) {
+           var url = "/api/project/user/" +currentUserId+ "/follow/" +followUserId;
+           return $http.get(url)
+               .then(function (response) {
+                   return response.data;
                });
        }
    }

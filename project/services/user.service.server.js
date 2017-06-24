@@ -27,8 +27,14 @@ app.post ("/api/project/upload", upload.single('myFile'), uploadImage);
 
 app.post('/api/project/login', passport.authenticate('local'), login);
 app.get('/api/project/loggedin', loggedin);
+app.get('/api/project/checkAdmin', checkAdmin);
 app.post('/api/project/register', register);
 app.post('/api/project/logout', logout);
+
+app.get('/api/project/checkAdmin/user', isAdmin, adminFindAllUsers);
+app.delete('/api/project/checkAdmin/:userId',isAdmin, adminDeleteUser);
+app.post('/api/project/checkAdmin',isAdmin, adminCreateUser);
+app.put('/api/project/checkAdmin/:userId',isAdmin, adminUpdateUser);
 
 
 function findUsers (req, res) {
@@ -59,11 +65,7 @@ function findUsers (req, res) {
     }
 
     else {
-        userModel
-            .findAllUsers()
-            .then(function (users) {
-               res.json(users);
-            });
+        res.sendStatus(404);
     }
 
 }
@@ -158,6 +160,24 @@ function loggedin(req, res) {
         res.json(user);
     } else {
         res.send('0');
+    }
+}
+
+function checkAdmin(req, res) {
+    var user = req.user;
+
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN')>-1) {
+        res.json(user);
+    } else {
+        res.send('0');
+    }
+}
+
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        next();
+    } else {
+        res.sendStatus(401);
     }
 }
 
@@ -321,6 +341,51 @@ function uploadImage(req, res) {
                     res.redirect("/#/profile/" +userId);
                 });
         });
+}
 
+function adminFindAllUsers(req, res) {
+    userModel
+        .findAllUsers()
+        .then(function (users) {
+            res.json(users);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
 
+function adminDeleteUser(req, res) {
+    var userId = req.params.userId;
+
+    userModel
+        .deleteUser(userId)
+        .then(function (status) {
+            res.send(status)
+        }, function (err) {
+           res.sendStatus(404);
+        });
+}
+
+function adminCreateUser(req, res) {
+    var newUser = req.body;
+
+    userModel
+        .adminCreateUser(newUser)
+        .then(function (newUser) {
+            res.json(newUser);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function adminUpdateUser(req, res) {
+    var userId = req.params.userId;
+    var user = req.body;
+
+    userModel
+        .updateUser(user, userId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }

@@ -9,6 +9,11 @@ var userSchema = mongoose.Schema({
     email : String,
     phone : Number,
     image : String,
+
+    roles : [{type: String,
+            default : 'USER',
+            enum : ['USER', 'ADMIN','CONNOISSEUR']}],
+
     likes : [String],
     followers: [String],
     following: [String],

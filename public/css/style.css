@@ -374,13 +374,18 @@ a.profile-menu:active {
 
 .submit-btn {
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .test {
     margin-top: 100px;
 }
 
-.follow {
+.admin-landing {
+    margin-top: 100px;
+}
+
+.follow, .connoisseur {
     text-align: center;
 }
 
@@ -401,6 +406,54 @@ a.profile-menu:active {
     margin-right: 10px;
 }
 
-.update-btn {
+.update-btn, .cancel-btn {
     margin-right: 5px;
+}
+
+.admin-list a{
+    color: #191919;
+}
+
+.list-bar-active {
+    background-color: #191919;
+    color : #fec503;
+}
+
+.follow-profile-picture {
+    margin-right: 20px;
+    height: 50px;
+    margin-bottom: 10px;
+    width : 50px;
+}
+
+.profile-name {
+    margin-left: 50px;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.review-description,
+.review-summary,
+.connoisseur-speciality,
+.connoisseur-experience {
+    overflow: hidden;
+}
+
+.connoisseur-landing-page {
+    margin-top: 150px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 10%;
+}
+
+.speciality, .experience {
+    margin-top: 20px;
+}
+
+.connoisseur-description {
+    font-size: medium;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.connoisseur-alert {
+    margin-top: 20px;
 }

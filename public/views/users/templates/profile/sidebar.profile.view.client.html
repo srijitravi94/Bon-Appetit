@@ -4,6 +4,21 @@
             <img class="profile-picture"
                  ng-src="{{model.user.image}}">
         </li>
+        <li>
+            <h4>
+                <span class="sidebar-menu profile-name">
+                    {{model.user.username}}'s timeline
+                </span>
+            </h4>
+        </li>
+        <li ng-if="model.userId === model.currentUser._id"
+            ng-hide="model.currentUser.roles.indexOf('ADMIN')>-1"
+            class="connoisseur">
+            <button class=" btn btn-primary btn-warning"
+                    ui-sref="index.connoisseur({userId : model.userId})">
+                Be a connoisseur
+            </button>
+        </li>
         <li ng-if="model.userId !== model.currentUser._id"
             class="follow">
             <button ng-show="!model.isFollow"

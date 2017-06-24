@@ -1,0 +1,45 @@
+<div class="container-fluid">
+
+    <div class="connoisseur-landing-page">
+
+        <h1 class="connoisseur">CONNOISSEUR APPLICATION</h1>
+        <p class="connoisseur connoisseur-description">"Get a chance to amaze the users around Bon Appetit. Tell us your awesomeness and be a chance to become a connoisseur..."</p>
+
+        <div class="alert alert-danger connoisseur-alert"
+             ng-show="model.error">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            {{model.error}}
+        </div>
+
+        <div class="alert alert-success connoisseur-alert"
+             ng-show="model.success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            {{model.success}}
+        </div>
+
+        <label for="speciality" class="speciality">Speciality</label>
+        <textarea class="form-control"
+                  rows="2"
+                  ng-model="speciality"
+                  placeholder="We know you're awesome. Tell us more..."
+                  id="speciality"></textarea>
+
+        <label for="experience" class="experience">Experience</label>
+        <textarea id="experience"
+                  ng-model="experience"
+                  rows="10"
+                  placeholder="Good judgment comes from experience and experience comes from bad judgment. Tell us yours..."
+                  class="form-control"></textarea>
+
+        <a ng-click="model.submitApplication(speciality, experience)"
+           class="submit-btn btn btn-primary btn-success pull-right">
+            Submit
+        </a>
+        <a ui-sref="index.profile({userId : model.userId})"
+           class="submit-btn cancel-btn btn btn-primary btn-danger pull-right">
+            Cancel
+        </a>
+    </div>
+</div>

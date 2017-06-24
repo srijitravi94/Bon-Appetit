@@ -6,11 +6,12 @@
     function restaurantService($http) {
 
         var api = {
-            createReview : createReview,
-            findReviewsForRestaurant : findReviewsForRestaurant,
-            findRestaurantReviewById : findRestaurantReviewById,
-            updateReviewForRestaurant : updateReviewForRestaurant,
-            deleteReview : deleteReview
+            "createReview"              : createReview,
+            "findReviewsForRestaurant"  : findReviewsForRestaurant,
+            "findRestaurantReviewById"  : findRestaurantReviewById,
+            "updateReviewForRestaurant" : updateReviewForRestaurant,
+            "deleteReview"              : deleteReview,
+            "findAllReviews"            : findAllReviews
         };
 
         return api;
@@ -52,6 +53,14 @@
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;
+                });
+        }
+
+        function findAllReviews() {
+            var url = "/api/project/restaurant/review";
+            return $http.get(url)
+                .then(function (response) {
+                   return response.data;
                 });
         }
     }

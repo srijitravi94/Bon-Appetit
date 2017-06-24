@@ -11,6 +11,11 @@
     <div class="container-fluid">
         <ul class="list-group" dir-paginate="follower in model.followers | itemsPerPage:5">
             <li class="list-group-item">
+                <span>
+                     <a ui-sref="index.profile({userId : follower._id})">
+                        <img class="follow-profile-picture" ng-src="{{follower.image}}">
+                     </a>
+                </span>
                 <a ui-sref="index.profile({userId : follower._id})">
                     {{follower.firstName}} {{follower.lastName}}
                 </a>

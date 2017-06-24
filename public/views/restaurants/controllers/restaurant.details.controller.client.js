@@ -24,7 +24,11 @@
             restaurantDetails();
             isRestaurantLiked();
             haveBeenThere();
+            findReviewsForRestaurant();
+        }
+        init();
 
+        function findReviewsForRestaurant() {
             restaurantService
                 .findReviewsForRestaurant(model.restaurantId)
                 .then(renderReviews);
@@ -36,9 +40,7 @@
                 }
                 model.reviews = reviews;
             }
-
         }
-        init();
 
         function restaurantDetails() {
             apiService
@@ -143,17 +145,7 @@
 
             restaurantService
                 .createReview(review, model.getLoggedIn._id)
-                .then(function (response) {
-                    restaurantService
-                        .findReviewsForRestaurant(model.restaurantId)
-                        .then(function (restaurantReview) {
-                            var reviews= [];
-                            for(r in restaurantReview){
-                               reviews.push(restaurantReview[r]);
-                           }
-                           model.reviews = reviews;
-                        });
-                });
+                .then(findReviewsForRestaurant);
         }
 
         function selectReview(review) {
@@ -191,33 +183,13 @@
 
             restaurantService
                 .updateReviewForRestaurant(review._id, review)
-                .then(function (response) {
-                    restaurantService
-                        .findReviewsForRestaurant(model.restaurantId)
-                        .then(function (restaurantReview) {
-                            var reviews= [];
-                            for(r in restaurantReview){
-                                reviews.push(restaurantReview[r]);
-                            }
-                            model.reviews = reviews;
-                        });
-                });
+                .then(findReviewsForRestaurant);
         }
 
         function deleteReview(reviewId) {
             restaurantService
                 .deleteReview(model.getLoggedIn._id, reviewId)
-                .then(function (response) {
-                    restaurantService
-                        .findReviewsForRestaurant(model.restaurantId)
-                        .then(function (restaurantReview) {
-                            var reviews= [];
-                            for(r in restaurantReview){
-                                reviews.push(restaurantReview[r]);
-                            }
-                            model.reviews = reviews;
-                        });
-                });
+                .then(findReviewsForRestaurant);
         }
 
     }

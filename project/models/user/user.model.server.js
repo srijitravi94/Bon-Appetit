@@ -3,6 +3,7 @@ var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('userModel', userSchema);
 
 userModel.createUser = createUser;
+userModel.adminCreateUser = adminCreateUser;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findAllUsers = findAllUsers;
@@ -25,6 +26,21 @@ module.exports = userModel;
 
 function createUser(user) {
     user.image = "https://www.drupal.org/files/issues/default-avatar.png";
+    user.roles = ['USER'];
+    return userModel
+        .create(user);
+}
+
+function adminCreateUser(user) {
+    user.image = "https://www.drupal.org/files/issues/default-avatar.png";
+    user.password = "bonAppetit@123";
+
+    if(user.roles) {
+        user.roles = user.roles.split(',');
+    } else {
+        user.roles = ['USER'];
+    }
+
     return userModel
         .create(user);
 }
@@ -50,6 +66,13 @@ function findUserById(userId) {
 }
 
 function updateUser(user, userId) {
+
+    delete user.username;
+
+    if(typeof user.roles === 'string') {
+        user.roles = user.roles.split(',');
+    }
+
     return userModel
         .update({_id: userId}, {$set: user});
 }

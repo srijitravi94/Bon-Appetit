@@ -6,6 +6,7 @@ app.get('/api/project/restaurant/:restaurantId/review', findReviewsForRestaurant
 app.get('/api/project/restaurant/review/:reviewId', findRestaurantReviewById);
 app.put('/api/project/restaurant/review/update/:reviewId', updateReviewForRestaurant);
 app.delete('/api/project/restaurant/review/:userId/delete/:reviewId', deleteReview);
+app.get('/api/project/restaurant/review', findAllReviews);
 
 
 function createReview(req, res) {
@@ -70,4 +71,14 @@ function deleteReview(req, res) {
         }, function (err) {
             res.sendStatus(404);
         });
+}
+
+function findAllReviews(req, res) {
+    restaurantModel
+        .findAllReviews()
+        .then(function (reviews) {
+            res.json(reviews);
+        }, function (err) {
+            res.sendStatus(404);
+        })
 }

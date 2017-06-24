@@ -15,9 +15,32 @@
 
         <div id="collapsable-nav" class="collapse navbar-collapse">
             <ul id="nav-list" class="nav navbar-nav navbar-right">
-                <li ng-show="!model.getLoggedIn._id"><a ui-sref="index.login" class="login-header-element">Login</a></li>
-                <li ng-show="!model.getLoggedIn._id"><a ui-sref="index.register" class="register-header-element">Register</a></li>
-                <li ng-show="model.getLoggedIn._id"><a ui-sref="index.profile({userId : model.getLoggedIn._id})" class="profile-header-element">Welcome, {{model.getLoggedIn.firstName}}</a></li>
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ui-sref="index.login"
+                       class="login-header-element">
+                        Login
+                    </a>
+                </li>
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ui-sref="index.register"
+                       class="register-header-element">
+                        Register
+                    </a>
+                </li>
+
+                <li ng-show="model.getLoggedIn._id">
+                    <a ui-sref="index.admin({userId : model.getLoggedIn._id})"
+                       ng-show="model.getLoggedIn.roles.indexOf('ADMIN')>-1"
+                       class="profile-header-element">
+                        ADMIN
+                    </a>
+                </li>
+                <li ng-show="model.getLoggedIn._id">
+                    <a ui-sref="index.profile({userId : model.getLoggedIn._id})"
+                       class="profile-header-element">
+                        Welcome, {{model.getLoggedIn.firstName}}
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

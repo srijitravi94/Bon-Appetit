@@ -64,7 +64,7 @@
                            id="username"
                            class="form-control"
                            placeholder="Username"
-                           ng-model="model.user.firstName"
+                           ng-model="model.user.username"
                            disabled>
                 </div>
             </div>
@@ -115,7 +115,7 @@
 
         <div ng-if="model.userId === model.currentUser._id" class="form-group">
             <div class="form-group">
-                <label for="image">Upload Image</label>
+                <label for="image">Profile Picture</label>
                 <form action="/api/project/upload" method="post" enctype="multipart/form-data">
                     <div class="input-group">
                             <span class="input-group-addon">

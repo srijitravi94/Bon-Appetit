@@ -1,0 +1,55 @@
+<div class="container-fluid admin-landing">
+    <h1>CONNOISSEUR APPLICATION</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item list-bar-active">
+            <div class="row">
+                <div class="col-md-2 col-xs-4">
+                    Username
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Person
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Speciality
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    Experience
+                </div>
+                <div class="col-md-1 col-xs-4">
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item" ng-repeat="connoisseur in model.connoisseurs">
+            <div class="row">
+                <div class="col-md-2 col-xs-4 admin-list">
+                    <a ui-sref="index.restaurantDetails({cityName : review.cityName, cityId: review.cityId, restaurantId: review.restaurantId})">
+                        {{connoisseur.username}}
+                    </a>
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs admin-list">
+                    <a ui-sref="index.profile({userId : review.userId})">
+                        {{connoisseur.firstName}} {{connoisseur.lastName}}
+                    </a>
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs connoisseur-speciality">
+                    {{connoisseur.speciality}}
+                </div>
+                <div class="col-md-3 col-xs-4 connoisseur-experience">
+                    {{connoisseur.experience}}
+                </div>
+                <div class="col-md-1 col-xs-4">
+                    <button ng-click="model.acceptApplication(connoisseur.userId)"
+                            class="btn btn-success pull-right">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button ng-click="model.deleteApplication(connoisseur.userId)"
+                            class="btn btn-danger pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

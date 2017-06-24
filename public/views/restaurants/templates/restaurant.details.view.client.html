@@ -100,8 +100,8 @@
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button>
 
-                    <h1>{{reviews.summary}}</h1>
-                    <p>{{reviews.description}}</p>
+                    <h1 class="review-summary">{{reviews.summary}}</h1>
+                    <p class="review-description">{{reviews.description}}</p>
                 </li>
             </ul>
 
@@ -109,8 +109,17 @@
     </div>
 </div>
 
+<div class="col-xs-12 col-sm-8 restaurant-review">
+    <div class="alert alert-danger"
+         ng-show="model.error">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        {{model.error}}
+    </div>
+</div>
 
 <div class="container-fluid" ng-show="model.getLoggedIn._id">
+
     <div class="col-xs-12 col-sm-8 restaurant-review">
         <label for="summary">Summary</label>
         <input class="form-control"
@@ -126,7 +135,7 @@
                   class="form-control"></textarea>
 
         <a ng-click="model.createReview(summary, description); summary=null; description=null;"
-           class="submit-btn btn btn-primary btn-success">
+           class="submit-btn btn btn-primary btn-success pull-right">
             Submit
         </a>
     </div>

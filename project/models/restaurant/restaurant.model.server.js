@@ -8,6 +8,7 @@ restaurantModel.findReviewsForRestaurant = findReviewsForRestaurant;
 restaurantModel.findRestaurantReviewById = findRestaurantReviewById;
 restaurantModel.updateReviewForRestaurant = updateReviewForRestaurant;
 restaurantModel.deleteReview = deleteReview;
+restaurantModel.findAllReviews = findAllReviews;
 
 module.exports = restaurantModel;
 
@@ -43,4 +44,9 @@ function deleteReview(userId, reviewId) {
            return userModel
                .deleteReviewsFromUser(userId, reviewId);
         });
+}
+
+function findAllReviews() {
+    return restaurantModel
+        .find();
 }

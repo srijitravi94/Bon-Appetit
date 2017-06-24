@@ -70,6 +70,82 @@
                 }
             })
 
+            //route for admin page
+            .state("index.admin", {
+                url : "profile/:userId/admin",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/admin/templates/admin.view.client.html",
+                        controller : "adminController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkAdmin
+                }
+            })
+
+            //route for admin-users page
+            .state("index.admin-users", {
+                url : "profile/:userId/admin/users",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/admin/templates/admin.users.view.client.html",
+                        controller : "adminUsersController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkAdmin
+                }
+            })
+
+            //route for admin-reviews page
+            .state("index.admin-reviews", {
+                url : "profile/:userId/admin/reviews",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/admin/templates/admin.reviews.view.client.html",
+                        controller : "adminReviewsController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkAdmin
+                }
+            })
+
+            //route for admin-connoisseurs page
+            .state("index.admin-connoisseurs", {
+                url : "profile/:userId/admin/connoisseurs",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/admin/templates/admin.connoisseurs.view.client.html",
+                        controller : "adminConnoisseursController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkAdmin
+                }
+            })
+
+            //route for connoisseur application
+            .state("index.connoisseur", {
+                url : "profile/:userId/connoisseur/application",
+                views : {
+                    "content@" : {
+                        templateUrl : "views/connoisseur/templates/connoisseur.view.client.html",
+                        controller : "connoisseurController",
+                        controllerAs : "model"
+                    }
+                },
+                resolve : {
+                    currentUser : checkLoggedIn
+                }
+            })
+
+
             //route for user likes
             .state("index.likes", {
                 url : "profile/:userId/likes",
@@ -237,6 +313,23 @@
             .then(function (user) {
                 if(user === '0') {
                     deferred.resolve({});
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkAdmin(userService, $q, $location) {
+        var deferred = $q.defer();
+
+        userService
+            .checkAdmin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/');
                 } else {
                     deferred.resolve(user);
                 }

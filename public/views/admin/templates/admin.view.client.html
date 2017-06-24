@@ -1,0 +1,20 @@
+<div class="container-fluid admin-landing">
+    <h1>ADMIN</h1>
+    <ul class="list-group admin-list">
+        <li class="list-group-item">
+            <a ui-sref="index.admin-users({userId : model.userId})">
+                Users
+            </a>
+        </li>
+        <li class="list-group-item admin-list">
+            <a ui-sref="index.admin-reviews({userId : model.userId})">
+                Restaurant Reviews
+            </a>
+        </li>
+        <li class="list-group-item admin-list">
+            <a ui-sref="index.admin-connoisseurs({userId : model.userId})">
+                Connoisseurs
+            </a>
+        </li>
+    </ul>
+</div>

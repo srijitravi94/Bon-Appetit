@@ -82,7 +82,11 @@
                 <li class="list-group-item">
                     <a ui-sref="index.profile({userId : reviews.userId})"><img class="profile-picture-small" ng-src="{{reviews.profilePic}}"></a>
 
-                    <span><a ui-sref="index.profile({userId : reviews.userId})">{{reviews.firstName}} {{reviews.lastName}}</a></span>
+                    <span class="user-list">
+                        <a ui-sref="index.profile({userId : reviews.userId})">
+                            {{reviews.firstName}} {{reviews.lastName}}
+                        </a>
+                    </span>
 
                     <button ng-show="model.getLoggedIn._id === reviews.userId"
                             ng-click="model.deleteReview(reviews._id)"

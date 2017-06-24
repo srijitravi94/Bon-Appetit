@@ -410,7 +410,8 @@ a.profile-menu:active {
     margin-right: 5px;
 }
 
-.admin-list a{
+.admin-list a,
+.user-list a{
     color: #191919;
 }
 

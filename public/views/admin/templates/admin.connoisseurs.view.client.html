@@ -24,14 +24,12 @@
         <li class="list-group-item" ng-repeat="connoisseur in model.connoisseurs">
             <div class="row">
                 <div class="col-md-2 col-xs-4 admin-list">
-                    <a ui-sref="index.restaurantDetails({cityName : review.cityName, cityId: review.cityId, restaurantId: review.restaurantId})">
+                    <a ui-sref="index.profile({userId : connoisseur.userId})">
                         {{connoisseur.username}}
                     </a>
                 </div>
                 <div class="col-md-3 hidden-sm hidden-xs admin-list">
-                    <a ui-sref="index.profile({userId : review.userId})">
-                        {{connoisseur.firstName}} {{connoisseur.lastName}}
-                    </a>
+                    {{connoisseur.firstName}} {{connoisseur.lastName}}
                 </div>
                 <div class="col-md-3 hidden-sm hidden-xs connoisseur-speciality">
                     {{connoisseur.speciality}}

@@ -81,8 +81,25 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <a ui-sref="index.profile({userId : reviews.userId})"><img class="profile-picture-small" ng-src="{{reviews.profilePic}}"></a>
+
                     <span><a ui-sref="index.profile({userId : reviews.userId})">{{reviews.firstName}} {{reviews.lastName}}</a></span>
-                    <i ng-show="model.getLoggedIn._id === reviews.userId" class="pull-right glyphicon glyphicon-cog"></i>&nbsp;
+
+                    <button ng-show="model.getLoggedIn._id === reviews.userId"
+                            ng-click="model.deleteReview(reviews._id)"
+                            data-toggle="modal"
+                            data-target="#deleteModal"
+                            class="btn btn-danger pull-right">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+
+                    <button ng-show="model.getLoggedIn._id === reviews.userId"
+                            ng-click="model.selectReview(reviews)"
+                            data-toggle="modal"
+                            data-target="#updateModal"
+                            class="update-btn btn btn-primary pull-right">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+
                     <h1>{{reviews.summary}}</h1>
                     <p>{{reviews.description}}</p>
                 </li>
@@ -114,3 +131,39 @@
         </a>
     </div>
 </div>
+
+<div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <label for="modal-summary">Summary</label>
+                <input class="form-control"
+                       ng-model="model.review.summary"
+                       placeholder="Review Summary"
+                       id="modal-summary"/><br>
+
+                <label for="modal-description">Description</label>
+                <textarea id="modal-description"
+                          ng-model="model.review.description"
+                          rows="5"
+                          placeholder="Detailed description"
+                          class="form-control"></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="modal-button btn btn-default btn-primary"
+                        data-dismiss="modal"
+                        ng-click="model.updateReview(model.review)">
+                    Update
+                </button>
+                <button type="button"
+                        class="modal-button btn btn-default btn-primary"
+                        data-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

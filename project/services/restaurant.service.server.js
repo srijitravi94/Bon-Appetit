@@ -3,6 +3,9 @@ var restaurantModel     = require('../models/restaurant/restaurant.model.server'
 
 app.post('/api/project/:userId/restaurant/review', createReview);
 app.get('/api/project/restaurant/:restaurantId/review', findReviewsForRestaurant);
+app.get('/api/project/restaurant/review/:reviewId', findRestaurantReviewById);
+app.put('/api/project/restaurant/review/update/:reviewId', updateReviewForRestaurant);
+app.delete('/api/project/restaurant/review/:userId/delete/:reviewId', deleteReview);
 
 
 function createReview(req, res) {
@@ -29,4 +32,42 @@ function findReviewsForRestaurant(req, res) {
             res.sendStatus(404);
         });
 
+}
+
+function findRestaurantReviewById(req, res) {
+    var reviewId = req.params.reviewId;
+
+    restaurantModel
+        .findRestaurantReviewById(reviewId)
+        .then(function (review) {
+            res.json(review);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function updateReviewForRestaurant(req, res) {
+    var reviewId = req.params.reviewId;
+    var review = req.body;
+
+    restaurantModel
+        .updateReviewForRestaurant(reviewId, review)
+        .then(function (review) {
+            res.json(review);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function deleteReview(req, res) {
+    var userId = req.params.userId;
+    var reviewId = req.params.reviewId;
+
+    restaurantModel
+        .deleteReview(userId, reviewId)
+        .then(function (status) {
+            res.json(status);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }

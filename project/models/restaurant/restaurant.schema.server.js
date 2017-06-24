@@ -6,17 +6,14 @@ var restaurantSchema = mongoose.Schema({
     cityId         : String,
     restaurantName : String,
     imageUrl       : String,
-    reviews      : [
-        {
-            userId      : String,
-            firstName   : String,
-            lastName    : String,
-            profilePic  : String,
-            summary     : String,
-            description : String,
-            dateCreated : {type : Date, default: Date.now}
-        }
-    ]
+    userId         : String,
+    firstName      : String,
+    lastName       : String,
+    profilePic     : String,
+    summary        : String,
+    description    : String,
+    dateCreated    : {type : Date, default: Date.now}
+
 }, {collection : "restaurant_reviews"});
 
 module.exports = restaurantSchema;

@@ -19,6 +19,7 @@ userModel.followUsers = followUsers;
 userModel.unfollowUsers = unfollowUsers;
 userModel.isUserFollowed = isUserFollowed;
 userModel.addReviewsForUser = addReviewsForUser;
+userModel.deleteReviewsFromUser = deleteReviewsFromUser;
 
 module.exports = userModel;
 
@@ -111,11 +112,21 @@ function isUserFollowed(currentUserId, followUserId) {
         .findOne({_id: currentUserId, following: {$in: [followUserId]}});
 }
 
-function addReviewsForUser(userId, review) {
+function addReviewsForUser(userId, reviewId) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            user.reviews.push(review);
+            user.reviews.push(reviewId);
+            return user.save();
+        });
+}
+
+function deleteReviewsFromUser(userId, reviewId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var index = user.reviews.indexOf(reviewId);
+            user.reviews.splice(index, 1);
             return user.save();
         });
 }

@@ -64,7 +64,7 @@
                            id="username"
                            class="form-control"
                            placeholder="Username"
-                           ng-model="model.user.username"
+                           ng-model="model.user.firstName"
                            disabled>
                 </div>
             </div>
@@ -114,20 +114,22 @@
         </form>
 
         <div ng-if="model.userId === model.currentUser._id" class="form-group">
-            <label for="image">Upload Image</label>
-            <form action="/api/project/upload" method="post" enctype="multipart/form-data">
-                <div class="input-group">
+            <div class="form-group">
+                <label for="image">Upload Image</label>
+                <form action="/api/project/upload" method="post" enctype="multipart/form-data">
+                    <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-upload"></i>
                             </span>
-                    <input name="myFile"
-                           type="file"
-                           id="image"
-                           class="form-control" />
-                    <input  name="userId" value="{{model.currentUser._id}}" style="display: none"/>
-                </div>
-                <button type="submit" class="btn btn-block btn-primary upload">Upload Image</button>
-            </form>
+                        <input name="myFile"
+                               type="file"
+                               id="image"
+                               class="form-control" />
+                        <input  name="userId" value="{{model.currentUser._id}}" style="display: none"/>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary upload">Upload Image</button>
+                </form>
+            </div>
         </div>
 
         <div ng-if="model.userId === model.currentUser._id"
@@ -169,7 +171,7 @@
                         <h5>Are you sure wanna update your details ?</h5>
                     </div>
                     <div class="modal-footer">
-                        <button type="button"
+                        <button type="submit"
                                 class="modal-button btn btn-default btn-primary"
                                 data-dismiss="modal"
                                 ng-click="model.updateUser(model.user)">

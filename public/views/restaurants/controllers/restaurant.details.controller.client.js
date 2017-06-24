@@ -2,7 +2,7 @@
     angular
         .module("BonAppetit")
         .controller("restaurantDetailsController", restaurantDetailsController);
-    
+
     function restaurantDetailsController(apiService, $stateParams, userService, getLoggedIn, restaurantService) {
         var model = this;
         model.restaurantId = $stateParams.restaurantId;
@@ -16,6 +16,9 @@
         model.undoVisited = undoVisited;
         model.haveBeenThere = haveBeenThere;
         model.createReview = createReview;
+        model.selectReview = selectReview;
+        model.updateReview = updateReview;
+        model.deleteReview = deleteReview;
 
         function init() {
             restaurantDetails();
@@ -29,7 +32,7 @@
             function renderReviews(restaurantReview) {
                 var reviews= [];
                 for(r in restaurantReview){
-                    reviews.push(restaurantReview[r].reviews[0]);
+                    reviews.push(restaurantReview[r]);
                 }
                 model.reviews = reviews;
             }
@@ -64,7 +67,7 @@
                     console.log(err);
                 });
         }
-        
+
         function isRestaurantLiked() {
             userService
                 .isRestaurantLiked(model.restaurantId, model.getLoggedIn._id)
@@ -129,16 +132,13 @@
                 cityId         : model.cityId,
                 restaurantName : model.restaurantDetails.name,
                 imageUrl       : model.restaurantDetails.featured_image,
-                reviews      :  [
-                    {
-                        userId      : model.getLoggedIn._id,
-                        firstName   : model.getLoggedIn.firstName,
-                        lastName    : model.getLoggedIn.lastName,
-                        profilePic  : model.getLoggedIn.image,
-                        summary     : summary,
-                        description : description
-                    }
-                ]
+                userId         : model.getLoggedIn._id,
+                firstName      : model.getLoggedIn.firstName,
+                lastName       : model.getLoggedIn.lastName,
+                profilePic     : model.getLoggedIn.image,
+                summary        : summary,
+                description    : description
+
             };
 
             restaurantService
@@ -149,9 +149,73 @@
                         .then(function (restaurantReview) {
                             var reviews= [];
                             for(r in restaurantReview){
-                               reviews.push(restaurantReview[r].reviews[0]);
+                               reviews.push(restaurantReview[r]);
                            }
                            model.reviews = reviews;
+                        });
+                });
+        }
+
+        function selectReview(review) {
+            model.review = angular.copy(review);
+        }
+
+        function updateReview(updatedReview) {
+
+            if(updatedReview.summary === null || updatedReview.summary === '' || typeof updatedReview.summary === 'undefined') {
+                model.error = "Summary is required";
+                return model.error;
+            }
+
+            if(updatedReview.description === null || updatedReview.description === '' || typeof updatedReview.description === 'undefined') {
+                model.error = "Description is required";
+                return model.error;
+            }
+
+            var review = {
+                _id            : updatedReview._id,
+                restaurantId   : model.restaurantId,
+                cityName       : model.cityName,
+                cityId         : model.cityId,
+                restaurantName : model.restaurantDetails.name,
+                imageUrl       : model.restaurantDetails.featured_image,
+                userId         : updatedReview.userId,
+                firstName      : updatedReview.firstName,
+                lastName       : updatedReview.lastName,
+                profilePic     : updatedReview.profilePic,
+                summary        : updatedReview.summary,
+                description    : updatedReview.description
+
+            };
+
+
+            restaurantService
+                .updateReviewForRestaurant(review._id, review)
+                .then(function (response) {
+                    restaurantService
+                        .findReviewsForRestaurant(model.restaurantId)
+                        .then(function (restaurantReview) {
+                            var reviews= [];
+                            for(r in restaurantReview){
+                                reviews.push(restaurantReview[r]);
+                            }
+                            model.reviews = reviews;
+                        });
+                });
+        }
+
+        function deleteReview(reviewId) {
+            restaurantService
+                .deleteReview(model.getLoggedIn._id, reviewId)
+                .then(function (response) {
+                    restaurantService
+                        .findReviewsForRestaurant(model.restaurantId)
+                        .then(function (restaurantReview) {
+                            var reviews= [];
+                            for(r in restaurantReview){
+                                reviews.push(restaurantReview[r]);
+                            }
+                            model.reviews = reviews;
                         });
                 });
         }

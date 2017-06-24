@@ -3,7 +3,7 @@
         .module("BonAppetit")
         .controller("reviewController", reviewController);
 
-    function reviewController(currentUser, $stateParams, userService) {
+    function reviewController(currentUser, $stateParams, userService, restaurantService) {
         var model = this;
         model.userId = $stateParams.userId;
         model.currentUser = currentUser;
@@ -23,10 +23,15 @@
             userService
                 .findUserById(model.userId)
                 .then(function (user) {
-                    var reviews = user.reviews;
+                    var reviews = [];
+                    var reviewId = user.reviews;
 
-                    for(var r in reviews) {
-                        userReviews.push(reviews[r]);
+                    for(var r in reviewId) {
+                        restaurantService
+                            .findRestaurantReviewById(reviewId[r]._id)
+                            .then(function (reviews) {
+                               userReviews.push(reviews);
+                            });
                     }
                 });
 

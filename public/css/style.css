@@ -400,3 +400,7 @@ a.profile-menu:active {
     width : 50px;
     margin-right: 10px;
 }
+
+.update-btn {
+    margin-right: 5px;
+}

@@ -22,11 +22,17 @@ userModel.isUserFollowed = isUserFollowed;
 userModel.addReviewsForUser = addReviewsForUser;
 userModel.deleteReviewsFromUser = deleteReviewsFromUser;
 userModel.addConnoisseurToUser = addConnoisseurToUser;
+userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.findUserByFacebookId = findUserByFacebookId;
+
 
 module.exports = userModel;
 
 function createUser(user) {
-    user.image = "https://www.drupal.org/files/issues/default-avatar.png";
+
+    if(user.image === null || user.image === '' || typeof user.image === 'undefined') {
+        user.image = "https://www.drupal.org/files/issues/default-avatar.png";
+    }
     user.roles = ['USER'];
     return userModel
         .create(user);
@@ -158,4 +164,14 @@ function deleteReviewsFromUser(userId, reviewId) {
 function addConnoisseurToUser(userId) {
     return userModel
         .update({'_id' : userId}, {$push : {roles : 'CONNOISSEUR'}});
+}
+
+function findUserByGoogleId(googleId) {
+    return userModel
+        .findOne({'google.id': googleId});
+}
+
+function findUserByFacebookId(facebookId) {
+    return userModel
+        .findOne({'facebook.id': facebookId});
 }

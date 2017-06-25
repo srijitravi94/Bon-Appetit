@@ -14,6 +14,16 @@ var userSchema = mongoose.Schema({
             default : 'USER',
             enum : ['USER', 'ADMIN','CONNOISSEUR']}],
 
+    google: {
+        id:    String,
+        token: String
+    },
+
+    facebook: {
+        id:    String,
+        token: String
+    },
+
     likes : [String],
     followers: [String],
     following: [String],

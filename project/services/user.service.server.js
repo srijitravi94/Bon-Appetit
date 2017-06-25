@@ -1,9 +1,52 @@
-var app           = require('../../express');
-var passport      = require('passport');
-var userModel     = require('../models/user/user.model.server');
-var multer = require('multer');
-var upload = multer({ dest: __dirname+'/../../public/uploads' });
-var LocalStrategy = require('passport-local').Strategy;
+var app            = require('../../express');
+var passport       = require('passport');
+var userModel      = require('../models/user/user.model.server');
+var multer         = require('multer');
+var upload         = multer({ dest: __dirname+'/../../public/uploads' });
+var LocalStrategy  = require('passport-local').Strategy;
+
+
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var googleConfig = {
+    clientID     : "778791023899-1e459flsanrmjjcquo4vkr2jedq1g9as.apps.googleusercontent.com",
+    clientSecret : "JfnOA8kfRW2zgKEqjK51AgSP",
+    callbackURL  : "http://localhost:3000/auth/google/callback"
+};
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+app.get('/auth/google',
+    passport.authenticate('google', {
+        scope : ['profile', 'email']
+    })
+);
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/#/',
+        failureRedirect: '/#/login'
+    })
+);
+
+var FacebookStrategy = require('passport-facebook').Strategy;
+var facebookConfig = {
+    clientID     : "1608958262472418",
+    clientSecret : "e5880626bb231f7ea20a42247de724b7",
+    callbackURL  : "http://localhost:3000/auth/facebook/callback",
+    profileFields : ['id', 'emails','name','photos']
+};
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+app.get('/auth/facebook',
+    passport.authenticate('facebook', {
+        scope : ['email']
+    })
+);
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/#/',
+        failureRedirect: '/#/login'
+    })
+);
 
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
@@ -401,4 +444,80 @@ function addConnoisseurToUser(req, res) {
         }, function (err) {
             res.sendStatus(404);
         });
+}
+
+function googleStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+                        image : profile._json.image.url,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel
+                        .createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            })
+
+        .then(function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            });
+}
+
+
+
+function facebookStrategy(accessToken, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(function (user) {
+            if(user) {
+                return done(null, user);
+            } else {
+                var email = profile.emails[0].value;
+                var emailParts = email.split("@");
+                var newFacebookUser = {
+                    username:  emailParts[0],
+                    firstName: profile.name.givenName,
+                    lastName:  profile.name.familyName,
+                    image : profile.photos[0].value,
+                    email:     email,
+                    facebook: {
+                        id:    profile.id,
+                        token: accessToken
+                    }
+                };
+                return userModel
+                    .createUser(newFacebookUser);
+            }
+        }, function(err) {
+            if (err) { return done(err); }
+        })
+
+        .then(function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) {
+                    return done(err);
+                }
+            });
 }

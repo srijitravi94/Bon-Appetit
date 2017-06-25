@@ -107,7 +107,6 @@
            var url = "/api/project/register";
            return $http.post(url, newUser)
                .then(function (response) {
-                   console.log(response.data);
                    return response.data;
                });
        }

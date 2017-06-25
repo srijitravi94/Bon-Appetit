@@ -467,3 +467,7 @@ a.profile-menu:active {
 .connoisseur-alert {
     margin-top: 20px;
 }
+
+.security {
+    margin-top: -10px;
+}

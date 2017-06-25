@@ -64,7 +64,7 @@
             userService
                 .unLikeRestaurant(resId, model.getLoggedIn._id)
                 .then(function (response) {
-                   model.isLiked = false;
+                    model.isLiked = false;
                 }, function (err) {
                     console.log(err);
                 });

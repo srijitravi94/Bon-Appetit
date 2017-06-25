@@ -440,6 +440,7 @@ a.profile-menu:active {
 
 .profile-name {
     margin-left: 50px;
+    text-align: center;
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
 }
 

@@ -9,7 +9,8 @@
                 <span class="sidebar-menu profile-name">
                     {{model.user.username}}
                 </span>
-                <i ng-show="model.currentUser.roles.indexOf('CONNOISSEUR')>-1"
+                <i ng-if="model.userId === model.currentUser._id"
+                   ng-show="model.currentUser.roles.indexOf('CONNOISSEUR')>-1"
                    class="fa fa-check-circle" aria-hidden="true">
                 </i>
             </h4>
@@ -23,15 +24,17 @@
                 </button>
             </a>
         </li>
-        <li ng-show="model.currentUser.roles.indexOf('CONNOISSEUR')>-1"
+        <li ng-if="model.userId === model.currentUser._id"
+            ng-show="model.currentUser.roles.indexOf('CONNOISSEUR')>-1"
             class="connoisseur">
             <button class=" btn btn-primary btn-warning">
                 Connoisseur
             </button>
         </li>
-        <li ng-show="model.currentUser.roles.indexOf('ADMIN')>-1"
+        <li ng-if="model.userId === model.currentUser._id"
+            ng-show="model.currentUser.roles.indexOf('ADMIN')>-1"
             class="connoisseur">
-            <a ng-href="#/profile/{{model.userId}}/admin">
+            <a ng-href="#/profile/{{model.currentUser._id}}/admin">
                 <button class=" btn btn-primary btn-warning">
                     Admin
                 </button>

@@ -4,10 +4,11 @@
         .controller("locationCollectionsController",locationCollectionsController);
 
 
-    function locationCollectionsController(apiService, $stateParams, $location) {
+    function locationCollectionsController(apiService, $routeParams, $location, getLoggedIn) {
         var model = this;
-        model.cityName = $stateParams.cityName;
-        model.cityId = $stateParams.cityId;
+        model.getLoggedIn = getLoggedIn;
+        model.cityName = $routeParams.cityName;
+        model.cityId = $routeParams.cityId;
         model.searchRestaurant = searchRestaurant;
 
         function init() {

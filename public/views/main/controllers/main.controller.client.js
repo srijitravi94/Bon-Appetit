@@ -3,8 +3,9 @@
         .module("BonAppetit")
         .controller("mainController",mainController);
 
-    function mainController($location) {
+    function mainController($location, getLoggedIn) {
         var model = this;
+        model.getLoggedIn = getLoggedIn;
         model.search = search;
 
         function search(location) {

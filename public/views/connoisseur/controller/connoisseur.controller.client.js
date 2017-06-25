@@ -3,9 +3,10 @@
         .module("BonAppetit")
         .controller("connoisseurController", connoisseurController);
 
-    function connoisseurController($stateParams, connoisseurService, currentUser, $timeout, $location) {
+    function connoisseurController($routeParams, connoisseurService, currentUser, $timeout, $location, getLoggedIn) {
         var model = this;
-        model.userId = $stateParams.userId;
+        model.userId = $routeParams.userId;
+        model.getLoggedIn = getLoggedIn;
         model.submitApplication = submitApplication;
 
         function submitApplication(speciality, experience) {

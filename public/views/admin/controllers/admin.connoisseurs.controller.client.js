@@ -3,9 +3,10 @@
         .module("BonAppetit")
         .controller("adminConnoisseursController", adminConnoisseursController);
 
-    function adminConnoisseursController($stateParams, connoisseurService) {
+    function adminConnoisseursController($routeParams, connoisseurService, getLoggedIn, userService) {
         var model = this;
-        model.userId = $stateParams.userId;
+        model.userId = $routeParams.userId;
+        model.getLoggedIn = getLoggedIn;
         model.acceptApplication = acceptApplication;
         model.deleteApplication = deleteApplication;
 
@@ -21,12 +22,27 @@
                 });
         }
 
-        function acceptApplication(userId) {
-            console.log("OK", userId);
+        function acceptApplication(connoisseur) {
+
+            connoisseurService
+                .deleteConnoisseur(connoisseur._id)
+                .then(function (response) {
+                });
+
+            userService
+                .addConnoisseurToUser(connoisseur.userId)
+                .then(function (user) {
+                    console.log(user);
+                   getAllConnoisseurs();
+                });
         }
 
-        function deleteApplication(userId) {
-            console.log("NO", userId);
+        function deleteApplication(connoisseur) {
+            connoisseurService
+                .deleteConnoisseur(connoisseur._id)
+                .then(function (response) {
+                    getAllConnoisseurs();
+                });
         }
     }
 })();

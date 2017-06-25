@@ -1,3 +1,52 @@
+<div>
+    <nav id="header-nav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a ng-href="#/"><h1>Bon Appétit</h1></a>
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul id="nav-list" class="nav navbar-nav navbar-right">
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ng-href="#/login"
+                       class="login-header-element">
+                        Login
+                    </a>
+                </li>
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ng-href="#/register"
+                       class="register-header-element">
+                        Register
+                    </a>
+                </li>
+
+                <li ng-show="model.getLoggedIn._id">
+                    <a ng-href="#/profile/{{model.getLoggedIn._id}}/admin"
+                       ng-show="model.getLoggedIn.roles.indexOf('ADMIN')>-1"
+                       class="profile-header-element">
+                        ADMIN
+                    </a>
+                </li>
+                <li ng-show="model.getLoggedIn._id">
+                    <a ng-href="#/profile/{{model.userId}}"
+                       class="profile-header-element">
+                        Welcome, {{model.getLoggedIn.firstName}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
 <div class="container-fluid admin-landing">
     <h1>RESTAURANT REVIEWS</h1>
 
@@ -24,12 +73,12 @@
         <li class="list-group-item" ng-repeat="review in model.reviews">
             <div class="row">
                 <div class="col-md-2 col-xs-4 admin-list">
-                    <a ui-sref="index.restaurantDetails({cityName : review.cityName, cityId: review.cityId, restaurantId: review.restaurantId})">
+                    <a ng-href="#/{{review.cityName}}/{{review.cityId}}/restaurant/{{review.restaurantId}}">
                         {{review.restaurantName}}
                     </a>
                 </div>
                 <div class="col-md-3 hidden-sm hidden-xs admin-list">
-                    <a ui-sref="index.profile({userId : review.userId})">
+                    <a ng-href="#/profile/{{review.userId}}">
                         {{review.firstName}} {{review.lastName}}
                     </a>
                 </div>

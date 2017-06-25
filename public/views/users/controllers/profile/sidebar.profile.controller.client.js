@@ -3,9 +3,9 @@
         .module("BonAppetit")
         .controller("sidebarController", sidebarController);
 
-    function sidebarController($stateParams, userService) {
+    function sidebarController($routeParams, userService) {
         var model    = this;
-        model.userId = $stateParams.userId;
+        model.userId = $routeParams.userId;
 
         function init() {
             userService

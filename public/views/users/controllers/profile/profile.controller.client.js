@@ -3,9 +3,10 @@
         .module('BonAppetit')
         .controller('profileController',profileController);
 
-    function profileController(userService, $stateParams, currentUser, $location, $timeout, $window) {
+    function profileController(userService, $routeParams, currentUser, $location, $timeout, getLoggedIn) {
         var model = this;
-        model.userId = $stateParams.userId;
+        model.userId = $routeParams.userId;
+        model.getLoggedIn = getLoggedIn;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
         model.currentUser = currentUser;
@@ -53,7 +54,6 @@
             function deleteSuccess() {
                 model.successMessage = "Profile deleted successfully. Please wait while we're redirecting ....";
                 $timeout( function() {
-                    $window.location.reload();
                     $location.url('/');
                 }, 3000);
             }
@@ -68,7 +68,6 @@
             userService
                 .logout()
                 .then(function () {
-                    $window.location.reload();
                     $timeout( function() {
                         $location.url('/login');
                     }, 1000);

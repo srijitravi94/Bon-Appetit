@@ -3,8 +3,9 @@
         .module("BonAppetit")
         .controller("loginController", loginController);
 
-    function loginController(userService, $location, $window) {
+    function loginController(userService, $location, getLoggedIn) {
         var model = this;
+        model.getLoggedIn = getLoggedIn;
         model.login = login;
 
         function login(username, password) {
@@ -25,7 +26,6 @@
 
             function foundUser(user) {
                 if(user !== null) {
-                    $window.location.reload();
                     $location.url('/profile/' +user._id );
                 }
             }

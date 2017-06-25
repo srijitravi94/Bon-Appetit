@@ -3,9 +3,10 @@
         .module("BonAppetit")
         .controller("searchLocationController",searchLocationController);
     
-    function searchLocationController(apiService, $stateParams, $location) {
+    function searchLocationController(apiService, $routeParams, $location, getLoggedIn) {
         var model = this;
-        model.location = $stateParams.location;
+        model.getLoggedIn = getLoggedIn;
+        model.location = $routeParams.location;
         model.search = search;
 
         function init() {

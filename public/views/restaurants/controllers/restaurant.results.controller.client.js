@@ -3,11 +3,12 @@
         .module("BonAppetit")
         .controller("searchRestaurantController", searchRestaurantController);
 
-    function searchRestaurantController(apiService, $stateParams) {
+    function searchRestaurantController(apiService, $routeParams, getLoggedIn) {
         var model = this;
-        model.restaurant = $stateParams.restaurant;
-        model.cityName = $stateParams.cityName;
-        model.cityId = $stateParams.cityId;
+        model.getLoggedIn = getLoggedIn;
+        model.restaurant = $routeParams.restaurant;
+        model.cityName = $routeParams.cityName;
+        model.cityId = $routeParams.cityId;
 
         function init() {
             searchRestaurantResults();

@@ -1,3 +1,52 @@
+<div>
+    <nav id="header-nav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a ng-href="#/"><h1>Bon Appétit</h1></a>
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul id="nav-list" class="nav navbar-nav navbar-right">
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ng-href="#/login"
+                       class="login-header-element">
+                        Login
+                    </a>
+                </li>
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ng-href="#/register"
+                       class="register-header-element">
+                        Register
+                    </a>
+                </li>
+
+                <li ng-show="model.getLoggedIn._id">
+                    <a ng-href="#/profile/{{model.getLoggedIn._id}}/admin"
+                       ng-show="model.getLoggedIn.roles.indexOf('ADMIN')>-1"
+                       class="profile-header-element">
+                        ADMIN
+                    </a>
+                </li>
+                <li ng-show="model.getLoggedIn._id">
+                    <a ng-href="#/profile/{{model.userId}}"
+                       class="profile-header-element">
+                        Welcome, {{model.getLoggedIn.firstName}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
 <div class="restaurant-details" ng-hide="model.restaurantDetails.location.latitude === '0.0000000000'">
     <ng-map center="{{model.restaurantDetails.location.latitude}}, {{model.restaurantDetails.location.longitude}}">
         <marker position="{{model.restaurantDetails.location.latitude}}, {{model.restaurantDetails.location.longitude}}"></marker>
@@ -80,10 +129,48 @@
         <div ng-repeat="reviews in model.reviews">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a ui-sref="index.profile({userId : reviews.userId})"><img class="profile-picture-small" ng-src="{{reviews.profilePic}}"></a>
+                    <a ng-href="#/profile/{{reviews.userId}}"><img class="profile-picture-small" ng-src="{{reviews.profilePic}}"></a>
 
                     <span class="user-list">
-                        <a ui-sref="index.profile({userId : reviews.userId})">
+                        <a ng-href="#/profile/{{reviews.userId}}">
+                            {{reviews.firstName}} {{reviews.lastName}}
+                        </a>
+                    </span>
+
+                    <button ng-show="model.getLoggedIn._id === reviews.userId"
+                            ng-click="model.deleteReview(reviews._id)"
+                            data-toggle="modal"
+                            data-target="#deleteModal"
+                            class="btn btn-danger pull-right">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+
+                    <button ng-show="model.getLoggedIn._id === reviews.userId"
+                            ng-click="model.selectReview(reviews)"
+                            data-toggle="modal"
+                            data-target="#updateModal"
+                            class="update-btn btn btn-primary pull-right">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+
+                    <h1 class="review-summary">{{reviews.summary}}</h1>
+                    <p class="review-description">{{reviews.description}}</p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" ng-show="model.getLoggedIn._id">
+    <div class="col-xs-12 col-sm-8 restaurant-review">
+        <div ng-repeat="reviews in model.reviews">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a ng-href="#/profile/{{reviews.userId}}"><img class="profile-picture-small" ng-src="{{reviews.profilePic}}"></a>
+
+                    <span class="user-list">
+                        <a ng-href="#/profile/{{reviews.userId}}">
                             {{reviews.firstName}} {{reviews.lastName}}
                         </a>
                     </span>

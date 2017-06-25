@@ -3,8 +3,10 @@
         .module("BonAppetit")
         .controller("adminUsersController", adminUsersController);
 
-    function adminUsersController(userService) {
+    function adminUsersController(userService,$routeParams, getLoggedIn) {
         var model = this;
+        model.getLoggedIn = getLoggedIn;
+        model.userId = $routeParams.userId;
         model.deleteUser = deleteUser;
         model.createUser = createUser;
         model.selectUser = selectUser;

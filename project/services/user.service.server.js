@@ -35,6 +35,7 @@ app.get('/api/project/checkAdmin/user', isAdmin, adminFindAllUsers);
 app.delete('/api/project/checkAdmin/:userId',isAdmin, adminDeleteUser);
 app.post('/api/project/checkAdmin',isAdmin, adminCreateUser);
 app.put('/api/project/checkAdmin/:userId',isAdmin, adminUpdateUser);
+app.put('/api/project/connoisseur/:userId/addRole', isAdmin, addConnoisseurToUser);
 
 
 function findUsers (req, res) {
@@ -383,6 +384,18 @@ function adminUpdateUser(req, res) {
 
     userModel
         .updateUser(user, userId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function addConnoisseurToUser(req, res) {
+    var userId = req.params.userId;
+
+    userModel
+        .addConnoisseurToUser(userId)
         .then(function (user) {
             res.json(user);
         }, function (err) {

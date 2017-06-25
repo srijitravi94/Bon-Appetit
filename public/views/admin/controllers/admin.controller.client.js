@@ -3,8 +3,10 @@
         .module("BonAppetit")
         .controller("adminController", adminController);
 
-    function adminController($stateParams) {
+    function adminController($routeParams, getLoggedIn) {
         var model = this;
-        model.userId = $stateParams.userId;
+        model.getLoggedIn = getLoggedIn;
+        model.userId = $routeParams.userId;
+
     }
 })();

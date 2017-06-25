@@ -29,7 +29,8 @@
            "adminFindAllUsers"     : adminFindAllUsers,
            "adminDeleteUser"       : adminDeleteUser,
            "adminCreateUser"       : adminCreateUser,
-           "adminUpdateUser"       : adminUpdateUser
+           "adminUpdateUser"       : adminUpdateUser,
+           "addConnoisseurToUser"  : addConnoisseurToUser
        };
 
        return api;
@@ -228,6 +229,14 @@
        function adminUpdateUser(user, userId) {
            var url = "/api/project/checkAdmin/" +userId;
            return $http.put(url, user)
+               .then(function (response) {
+                   return response.data;
+               });
+       }
+
+       function addConnoisseurToUser(userId) {
+           var url = "/api/project/connoisseur/" +userId+ "/addRole";
+           return $http.put(url)
                .then(function (response) {
                    return response.data;
                });

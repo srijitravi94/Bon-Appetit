@@ -6,7 +6,8 @@
     function connoisseurService($http) {
         var api = {
             "submitApplication"  : submitApplication,
-            "getAllConnoisseurs" : getAllConnoisseurs
+            "getAllConnoisseurs" : getAllConnoisseurs,
+            "deleteConnoisseur"  : deleteConnoisseur
         };
 
         return api;
@@ -22,6 +23,14 @@
         function getAllConnoisseurs() {
             var url = "/api/project/allConnoisseurs/application";
             return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        
+        function deleteConnoisseur(connoisseurId) {
+            var url = "/api/project/connoisseur/" +connoisseurId;
+            return $http.delete(url)
                 .then(function (response) {
                     return response.data;
                 });

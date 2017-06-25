@@ -3,9 +3,10 @@
         .module("BonAppetit")
         .controller("visitedController", visitedController);
 
-    function visitedController($stateParams, currentUser, apiService, userService) {
+    function visitedController($routeParams, currentUser, apiService, userService, getLoggedIn) {
         var model = this;
-        model.userId = $stateParams.userId;
+        model.userId = $routeParams.userId;
+        model.getLoggedIn = getLoggedIn;
         model.currentUser = currentUser;
         model.follow = follow;
         model.unfollow = unfollow;
@@ -16,6 +17,18 @@
         function init() {
             findVisitedForUser();
             isUserFollowed();
+
+            userService
+                .findUserById(model.userId)
+                .then(renderUser, userError);
+
+            function renderUser(user) {
+                model.user = user;
+            }
+
+            function userError() {
+                model.error = "User not found";
+            }
         } init();
 
 

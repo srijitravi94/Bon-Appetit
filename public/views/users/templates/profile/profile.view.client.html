@@ -1,8 +1,56 @@
+<div>
+    <nav id="header-nav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a ng-href="#/"><h1>Bon Appétit</h1></a>
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul id="nav-list" class="nav navbar-nav navbar-right">
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ng-href="#/login"
+                       class="login-header-element">
+                        Login
+                    </a>
+                </li>
+                <li ng-show="!model.getLoggedIn._id">
+                    <a ng-href="#/register"
+                       class="register-header-element">
+                        Register
+                    </a>
+                </li>
+
+                <li ng-show="model.getLoggedIn._id">
+                    <a ng-href="#/profile/{{model.getLoggedIn._id}}/admin"
+                       ng-show="model.getLoggedIn.roles.indexOf('ADMIN')>-1"
+                       class="profile-header-element">
+                        ADMIN
+                    </a>
+                </li>
+                <li ng-show="model.getLoggedIn._id">
+                    <a ng-href="#/profile/{{model.userId}}"
+                       class="profile-header-element">
+                        Welcome, {{model.getLoggedIn.firstName}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
 <div id="wrapper" data-spy="scroll" data-target="#sidebar-wrapper">
 
     <div ng-include="'views/users/templates/profile/sidebar.profile.view.client.html'"></div>
 
-    <a href="#menu-toggle"
+    <a ng-href="#menu-toggle"
        id="menu-toggle"
        class="profile-menu btn btn-default">
         <i class="glyphicon glyphicon-menu-right"></i>

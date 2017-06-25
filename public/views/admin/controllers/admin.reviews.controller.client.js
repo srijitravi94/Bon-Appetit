@@ -3,9 +3,10 @@
         .module("BonAppetit")
         .controller("adminReviewsController", adminReviewsController);
 
-    function adminReviewsController($stateParams, restaurantService) {
+    function adminReviewsController($routeParams, restaurantService, getLoggedIn) {
         var model = this;
-        model.userId = $stateParams.userId;
+        model.getLoggedIn = getLoggedIn;
+        model.userId = $routeParams.userId;
         model.deleteReview = deleteReview;
 
         function init() {

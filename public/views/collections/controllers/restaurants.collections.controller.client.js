@@ -4,11 +4,12 @@
         .controller("restaurantCollectionsController",restaurantCollectionsController);
 
 
-    function restaurantCollectionsController(apiService, $stateParams) {
+    function restaurantCollectionsController(apiService, $routeParams, getLoggedIn) {
         var model = this;
-        model.cityName = $stateParams.cityName;
-        model.cityId = $stateParams.cityId;
-        model.collectionId = $stateParams.collectionId;
+        model.getLoggedIn = getLoggedIn;
+        model.cityName = $routeParams.cityName;
+        model.cityId = $routeParams.cityId;
+        model.collectionId = $routeParams.collectionId;
 
         function init() {
             collections();

@@ -324,6 +324,10 @@ a.restaurant-menu {
     margin-bottom: 80px;
 }
 
+.sidebar-nav li a:hover {
+    background-color: transparent;
+}
+
 .profile-menu {
     margin-top: 80px;
     background-color: #191919;
@@ -430,6 +434,11 @@ a.profile-menu:active {
 .profile-name {
     margin-left: 50px;
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.fa-check-circle {
+    color : #fec503;
+    margin-left: -10px;
 }
 
 .review-description,

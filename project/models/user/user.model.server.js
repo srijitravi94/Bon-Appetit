@@ -21,6 +21,7 @@ userModel.unfollowUsers = unfollowUsers;
 userModel.isUserFollowed = isUserFollowed;
 userModel.addReviewsForUser = addReviewsForUser;
 userModel.deleteReviewsFromUser = deleteReviewsFromUser;
+userModel.addConnoisseurToUser = addConnoisseurToUser;
 
 module.exports = userModel;
 
@@ -152,4 +153,9 @@ function deleteReviewsFromUser(userId, reviewId) {
             user.reviews.splice(index, 1);
             return user.save();
         });
+}
+
+function addConnoisseurToUser(userId) {
+    return userModel
+        .update({'_id' : userId}, {$push : {roles : 'CONNOISSEUR'}});
 }

@@ -40,49 +40,49 @@ app.put('/api/project/connoisseur/:userId/addRole', isAdmin, addConnoisseurToUse
 
 
 
-// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// var googleConfig = {
-//     clientID     : process.env.GOOGLE_CLIENT_ID,
-//     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-//     callbackURL  : process.env.GOOGLE_CALLBACK_URL
-// };
-// passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-//
-// app.get('/auth/google',
-//     passport.authenticate('google', {
-//         scope : ['profile', 'email']
-//     })
-// );
-//
-// app.get('/auth/google/callback',
-//     passport.authenticate('google', {
-//         successRedirect: '/#/',
-//         failureRedirect: '/#/login'
-//     })
-// );
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var googleConfig = {
+    clientID     : process.env.GOOGLE_CLIENT_ID,
+    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL  : process.env.GOOGLE_CALLBACK_URL
+};
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+app.get('/auth/google',
+    passport.authenticate('google', {
+        scope : ['profile', 'email']
+    })
+);
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/#/',
+        failureRedirect: '/#/login'
+    })
+);
 
 
-// var FacebookStrategy = require('passport-facebook').Strategy;
-// var facebookConfig = {
-//     clientID     : process.env.FACEBOOK_CLIENT_ID,
-//     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-//     callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
-//     profileFields : ['id', 'emails','name','photos']
-// };
-//
-// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-// app.get('/auth/facebook',
-//     passport.authenticate('facebook', {
-//         scope : ['email']
-//     })
-// );
-//
-// app.get('/auth/facebook/callback',
-//     passport.authenticate('facebook', {
-//         successRedirect: '/#/',
-//         failureRedirect: '/#/login'
-//     })
-// );
+var FacebookStrategy = require('passport-facebook').Strategy;
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+    profileFields : ['id', 'emails','name','photos']
+};
+
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+app.get('/auth/facebook',
+    passport.authenticate('facebook', {
+        scope : ['email']
+    })
+);
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/#/',
+        failureRedirect: '/#/login'
+    })
+);
 
 
 function findUsers (req, res) {

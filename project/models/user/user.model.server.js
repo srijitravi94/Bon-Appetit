@@ -40,7 +40,7 @@ function createUser(user) {
 
 function adminCreateUser(user) {
     user.image = "https://www.drupal.org/files/issues/default-avatar.png";
-    user.password = "bonAppetit@123";
+    user.password = "$2a$10$jUmr/jSoPMZYmgd22b7eq.6cfOMeDLvEJRdL1vrdrI0im9H9Ju.zO";
 
     if(user.roles) {
         user.roles = user.roles.split(',');
@@ -75,6 +75,7 @@ function findUserById(userId) {
 function updateUser(user, userId) {
 
     delete user.username;
+    delete user.password;
 
     if(typeof user.roles === 'string') {
         user.roles = user.roles.split(',');

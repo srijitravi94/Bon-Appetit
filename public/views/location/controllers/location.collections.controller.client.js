@@ -28,7 +28,7 @@
                             collections.push(cityCollections[c].collection);
                         }
                     } else {
-                        console.log('No collections found');
+                        model.noCollections = true;
                     }
                     model.collections = collections;
                 });

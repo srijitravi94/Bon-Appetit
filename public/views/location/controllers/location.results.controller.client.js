@@ -19,7 +19,7 @@
                 $location.url("/search/" + location);
             }
             else {
-                console.log("Please enter a location")
+                return;
             }
         }
 

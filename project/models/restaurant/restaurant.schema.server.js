@@ -6,6 +6,7 @@ var restaurantSchema = mongoose.Schema({
     cityId         : String,
     restaurantName : String,
     imageUrl       : String,
+    isConnoisseur  : Boolean,
     userId         : String,
     firstName      : String,
     lastName       : String,

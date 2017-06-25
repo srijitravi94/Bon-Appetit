@@ -13,36 +13,7 @@
             </div>
         </div>
 
-        <div id="collapsable-nav" class="collapse navbar-collapse">
-            <ul id="nav-list" class="nav navbar-nav navbar-right">
-                <li ng-show="!model.getLoggedIn._id">
-                    <a ng-href="#/login"
-                       class="login-header-element">
-                        Login
-                    </a>
-                </li>
-                <li ng-show="!model.getLoggedIn._id">
-                    <a ng-href="#/register"
-                       class="register-header-element">
-                        Register
-                    </a>
-                </li>
-
-                <li ng-show="model.getLoggedIn._id">
-                    <a ng-href="#/profile/{{model.getLoggedIn._id}}/admin"
-                       ng-show="model.getLoggedIn.roles.indexOf('ADMIN')>-1"
-                       class="profile-header-element">
-                        ADMIN
-                    </a>
-                </li>
-                <li ng-show="model.getLoggedIn._id">
-                    <a ng-href="#/profile/{{model.getLoggedIn._id}}"
-                       class="profile-header-element">
-                        Welcome, {{model.getLoggedIn.firstName}}
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <div ng-include="'views/common/templates/header.view.client.html'"></div>
     </nav>
 </div>
 

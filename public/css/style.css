@@ -9,9 +9,19 @@
 }
 
 .navbar-brand a{
-    color : #fec503 ;
+    color : #fec503;
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
     text-decoration: none;
+}
+
+.main-heading {
+    margin-top: -40px;
+    margin-left: 50px;
+}
+
+span.glyphicon.glyphicon-option-vertical {
+    margin-top: 30px;
+    color : #fec503 ;
 }
 
 .navbar-brand a:hover,
@@ -97,7 +107,7 @@
 }
 
 .profile {
-    margin-top: 20px;
+    margin-top: 150px;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 10%;
@@ -195,6 +205,7 @@ a .glyphicon-search {
 /* Location suggestions page and collections page*/
 .search-result-title, .collection-result-title {
     margin-top: -5%;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
 }
 
 li span.content {
@@ -334,10 +345,6 @@ a.restaurant-menu {
     color : #fec503;
 }
 
-.glyphicon-menu-right, .glyphicon-menu-left {
-    font-size: 30px;
-}
-
 a.profile-menu:hover,
 a.profile-menu:focus,
 a.profile-menu:active {
@@ -363,11 +370,11 @@ a.profile-menu:active {
     background-color: #191919;
 }
 
-.glyphicon-before {
+.fa-before {
     color : black;
 }
 
-.glyphicon-after {
+.fa-after {
     color: green;
 }
 
@@ -470,4 +477,34 @@ a.profile-menu:active {
 
 .security {
     margin-top: -10px;
+}
+
+.res-user {
+    color: #191919;
+}
+
+.summary-connoisseur, .title {
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.description-connoisseur {
+    font-style: italic;
+}
+
+a.facebook {
+    margin-bottom: 10px;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-top: -100px;
+    height: 1000px;
+}
+
+.glyphicon-option-vertical {
+    font-size: 30px;
+}
+
+.glyphicon-menu-left {
+    font-size: 30px;
+    margin-top: 10px;
 }

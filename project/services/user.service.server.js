@@ -1,52 +1,10 @@
 var app            = require('../../express');
 var passport       = require('passport');
 var userModel      = require('../models/user/user.model.server');
+var bcrypt         = require("bcrypt-nodejs");
 var multer         = require('multer');
 var upload         = multer({ dest: __dirname+'/../../public/uploads' });
 var LocalStrategy  = require('passport-local').Strategy;
-
-
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var googleConfig = {
-    clientID     : "778791023899-1e459flsanrmjjcquo4vkr2jedq1g9as.apps.googleusercontent.com",
-    clientSecret : "JfnOA8kfRW2zgKEqjK51AgSP",
-    callbackURL  : "http://localhost:3000/auth/google/callback"
-};
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-
-app.get('/auth/google',
-    passport.authenticate('google', {
-        scope : ['profile', 'email']
-    })
-);
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: '/#/',
-        failureRedirect: '/#/login'
-    })
-);
-
-var FacebookStrategy = require('passport-facebook').Strategy;
-var facebookConfig = {
-    clientID     : "1608958262472418",
-    clientSecret : "e5880626bb231f7ea20a42247de724b7",
-    callbackURL  : "http://localhost:3000/auth/facebook/callback",
-    profileFields : ['id', 'emails','name','photos']
-};
-passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-app.get('/auth/facebook',
-    passport.authenticate('facebook', {
-        scope : ['email']
-    })
-);
-
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/#/',
-        failureRedirect: '/#/login'
-    })
-);
 
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
@@ -79,6 +37,52 @@ app.delete('/api/project/checkAdmin/:userId',isAdmin, adminDeleteUser);
 app.post('/api/project/checkAdmin',isAdmin, adminCreateUser);
 app.put('/api/project/checkAdmin/:userId',isAdmin, adminUpdateUser);
 app.put('/api/project/connoisseur/:userId/addRole', isAdmin, addConnoisseurToUser);
+
+
+
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var googleConfig = {
+    clientID     : process.env.GOOGLE_CLIENT_ID,
+    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL  : process.env.GOOGLE_CALLBACK_URL
+};
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+app.get('/auth/google',
+    passport.authenticate('google', {
+        scope : ['profile', 'email']
+    })
+);
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/#/',
+        failureRedirect: '/#/login'
+    })
+);
+
+
+var FacebookStrategy = require('passport-facebook').Strategy;
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+    profileFields : ['id', 'emails','name','photos']
+};
+
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+app.get('/auth/facebook',
+    passport.authenticate('facebook', {
+        scope : ['email']
+    })
+);
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/#/',
+        failureRedirect: '/#/login'
+    })
+);
 
 
 function findUsers (req, res) {
@@ -164,16 +168,28 @@ function deleteUser(req, res) {
 }
 
 function localStrategy(username, password, done) {
+
     userModel
-        .findUserByCredentials(username, password)
-        .then(function (user) {
+        .findUserByUsername(username)
+        .then(function(user) {
             if(user) {
-                done(null, user);
+                if (bcrypt.compareSync (password, user.password)) {
+                    return userModel
+                        .findUserByCredentials(username, user.password)
+                        .then(function (user) {
+                            if (user) {
+                                return done(null, user);
+                            } else {
+                                return done(null, false);
+                            }
+                        });
+                }
+                else {
+                    return done(null, false);
+                }
             } else {
-                done(null, false);
+                return done(null, false);
             }
-        }, function (err) {
-            done(null, false);
         });
 }
 
@@ -227,6 +243,9 @@ function isAdmin(req, res, next) {
 
 function register(req, res) {
     var newUser = req.body;
+
+    newUser.password = bcrypt.hashSync(newUser.password);
+
     userModel
         .createUser(newUser)
         .then(function (user) {

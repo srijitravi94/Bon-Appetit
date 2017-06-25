@@ -7,7 +7,7 @@
         <li>
             <h4>
                 <span class="sidebar-menu profile-name">
-                    {{model.user.username}}'s timeline
+                    {{model.user.username}}
                 </span>
                 <i ng-show="model.currentUser.roles.indexOf('CONNOISSEUR')>-1"
                    class="fa fa-check-circle" aria-hidden="true">
@@ -28,6 +28,14 @@
             <button class=" btn btn-primary btn-warning">
                 Connoisseur
             </button>
+        </li>
+        <li ng-show="model.currentUser.roles.indexOf('ADMIN')>-1"
+            class="connoisseur">
+            <a ng-href="#/profile/{{model.userId}}/admin">
+                <button class=" btn btn-primary btn-warning">
+                    Admin
+                </button>
+            </a>
         </li>
         <li ng-if="model.userId !== model.currentUser._id"
             class="follow">

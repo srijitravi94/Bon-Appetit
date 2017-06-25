@@ -19,6 +19,7 @@
         model.selectReview = selectReview;
         model.updateReview = updateReview;
         model.deleteReview = deleteReview;
+        model.createConnoisseurReview = createConnoisseurReview;
 
         function init() {
             restaurantDetails();
@@ -34,13 +35,13 @@
                 .then(renderReviews);
 
             function renderReviews(restaurantReview) {
-                var reviews= [];
-                for(r in restaurantReview){
-                    reviews.push(restaurantReview[r]);
+                    var reviews= [];
+                    for(r in restaurantReview){
+                        reviews.push(restaurantReview[r]);
+                    }
+                    model.reviews = reviews;
                 }
-                model.reviews = reviews;
             }
-        }
 
         function restaurantDetails() {
             apiService
@@ -134,14 +135,16 @@
                 cityId         : model.cityId,
                 restaurantName : model.restaurantDetails.name,
                 imageUrl       : model.restaurantDetails.featured_image,
+                isConnoisseur  : model.getLoggedIn.roles.indexOf('CONNOISSEUR')>-1,
                 userId         : model.getLoggedIn._id,
                 firstName      : model.getLoggedIn.firstName,
                 lastName       : model.getLoggedIn.lastName,
                 profilePic     : model.getLoggedIn.image,
                 summary        : summary,
                 description    : description
-
             };
+
+            console.log(review);
 
             restaurantService
                 .createReview(review, model.getLoggedIn._id)
@@ -189,6 +192,38 @@
         function deleteReview(reviewId) {
             restaurantService
                 .deleteReview(model.getLoggedIn._id, reviewId)
+                .then(findReviewsForRestaurant);
+        }
+
+        function createConnoisseurReview(summary, description) {
+
+            if(summary === null || summary === '' || typeof summary === 'undefined') {
+                model.error = "Summary is required";
+                return model.error;
+            }
+
+            if(description === null || description === '' || typeof description === 'undefined') {
+                model.error = "Description is required";
+                return model.error;
+            }
+
+            var review = {
+                restaurantId   : model.restaurantId,
+                cityName       : model.cityName,
+                cityId         : model.cityId,
+                restaurantName : model.restaurantDetails.name,
+                imageUrl       : model.restaurantDetails.featured_image,
+                isConnoisseur  : model.getLoggedIn.roles.indexOf('CONNOISSEUR')>-1,
+                userId         : model.getLoggedIn._id,
+                firstName      : model.getLoggedIn.firstName,
+                lastName       : model.getLoggedIn.lastName,
+                profilePic     : model.getLoggedIn.image,
+                summary        : summary,
+                description    : description
+            };
+
+            restaurantService
+                .createReview(review, model.getLoggedIn._id)
                 .then(findReviewsForRestaurant);
         }
 

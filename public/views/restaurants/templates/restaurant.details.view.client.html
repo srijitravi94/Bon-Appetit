@@ -111,9 +111,9 @@
     </div>
 </div>
 
-<div class="container-fluid" ng-show="model.getLoggedIn._id" ng-hide="model.getLoggedIn.roles.indexOf('CONNOISSEUR')>-1">
+<div class="container-fluid" ng-show="model.getLoggedIn._id">
 
-    <div class="col-xs-12 col-sm-8 restaurant-review">
+    <div class="col-xs-12 col-sm-8 restaurant-review"  ng-hide="model.getLoggedIn.roles.indexOf('CONNOISSEUR')>-1">
         <label for="summary">Summary</label>
         <input class="form-control"
                ng-model="summary"
@@ -134,9 +134,9 @@
     </div>
 </div>
 
-<div class="container-fluid" ng-show="model.getLoggedIn._id && model.getLoggedIn.roles.indexOf('CONNOISSEUR')>-1">
+<div class="container-fluid" ng-show="model.getLoggedIn._id">
 
-    <div class="col-xs-12 col-sm-8 restaurant-review">
+    <div class="col-xs-12 col-sm-8 restaurant-review" ng-show="model.getLoggedIn.roles.indexOf('CONNOISSEUR')>-1">
         <label for="connoisseur-summary">Summary</label>
         <input class="form-control"
                ng-model="connoisseurSummary"

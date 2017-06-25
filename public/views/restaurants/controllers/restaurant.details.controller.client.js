@@ -144,7 +144,6 @@
                 description    : description
             };
 
-            console.log(review);
 
             restaurantService
                 .createReview(review, model.getLoggedIn._id)

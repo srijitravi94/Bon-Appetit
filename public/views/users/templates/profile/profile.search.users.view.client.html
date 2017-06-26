@@ -1,0 +1,67 @@
+<div>
+    <nav id="header-nav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a ng-href="#menu-toggle"
+                       id="menu-toggle">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </a>
+                    <a ng-href="#/">
+                        <h1 class="main-heading">Bon Appétit</h1>
+                    </a>
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <div ng-include="'views/common/templates/header.view.client.html'"></div>
+    </nav>
+</div>
+
+
+<div id="wrapper" data-spy="scroll" data-target="#sidebar-wrapper">
+
+    <div ng-include="'views/users/templates/profile/sidebar.profile.view.client.html'"></div>
+
+    <div class="restaurant-search-list">
+        <div>
+            <form role="form" ng-submit="model.searchUsers(name)">
+                <div class="input-group search-user">
+                    <input type="text" class="form-control search-box" placeholder="Search for a user using first name..." autofocus="" ng-model="name">
+                    <a class="input-group-addon search-box btn-primary btn-search" ng-click="model.searchUsers(name)">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="container-fluid">
+            <ul class="list-group" ng-repeat="user in model.users">
+                <li class="list-group-item">
+                <span>
+                    <a ng-href="#/profile/{{user._id}}">
+                        <img class="follow-profile-picture" ng-src="{{user.image}}">
+                    </a>
+                </span>
+                    <a ng-href="#/profile/{{user._id}}">
+                        {{user.firstName}} {{user.lastName}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+

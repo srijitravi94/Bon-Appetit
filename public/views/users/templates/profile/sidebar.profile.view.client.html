@@ -92,5 +92,12 @@
                 <b><span class="sidebar-menu">Reviews</span></b>
             </a>
         </li>
+        <li>
+            <a ng-if="model.userId === model.currentUser._id"
+                ng-href="#/profile/{{model.currentUser._id}}/search/users">
+                <i class="gly fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;
+                <b><span class="sidebar-menu">Search Users</span></b>
+            </a>
+        </li>
     </ul>
 </div>

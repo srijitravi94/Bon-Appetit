@@ -162,6 +162,17 @@
                 }
             })
 
+            //route for search users
+            .when("/profile/:userId/search/users", {
+                templateUrl : "views/users/templates/profile/profile.search.users.view.client.html",
+                controller : "searchUsersController",
+                controllerAs : "model",
+                resolve : {
+                    getLoggedIn : getLoggedIn,
+                    currentUser : checkLoggedIn
+                }
+            })
+
             //route for search results
             .when("/search/:location", {
                 templateUrl : "views/location/templates/location.results.view.client.html",

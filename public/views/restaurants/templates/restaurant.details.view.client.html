@@ -160,7 +160,7 @@
 
 <div class="container-fluid" ng-show="model.getLoggedIn._id">
     <div class="col-xs-12 col-sm-8 restaurant-review">
-        <h1 class="title">CONNOISSEUR REVIEWS</h1>
+        <h1 ng-show="model.reviews.length > 0" class="title">CONNOISSEUR REVIEWS</h1>
         <div ng-repeat="reviews in model.reviews">
             <ul class="list-group" ng-show="reviews.isConnoisseur">
                 <li class="list-group-item">
@@ -202,7 +202,7 @@
 
 <div class="container-fluid" ng-show="model.getLoggedIn._id">
     <div class="col-xs-12 col-sm-8 restaurant-review">
-        <h1 class="title">USER REVIEWS</h1>
+        <h1 ng-show="model.reviews.length > 0" class="title">USER REVIEWS</h1>
         <div ng-repeat="reviews in model.reviews">
             <ul class="list-group" ng-show="!reviews.isConnoisseur">
                 <li class="list-group-item">

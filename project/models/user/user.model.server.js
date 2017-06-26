@@ -6,6 +6,7 @@ userModel.createUser = createUser;
 userModel.adminCreateUser = adminCreateUser;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
+userModel.findUserByFirstName = findUserByFirstName;
 userModel.findAllUsers = findAllUsers;
 userModel.findUserById = findUserById;
 userModel.updateUser = updateUser;
@@ -70,6 +71,11 @@ function findAllUsers() {
 function findUserById(userId) {
     return userModel
         .findById({'_id' : userId});
+}
+
+function findUserByFirstName(firstName) {
+    return userModel
+        .find({firstName : firstName});
 }
 
 function updateUser(user, userId) {

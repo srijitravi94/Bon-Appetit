@@ -388,10 +388,6 @@ a.profile-menu:active {
     margin-bottom: 50px;
 }
 
-.test {
-    margin-top: 100px;
-}
-
 .admin-landing {
     margin-top: 100px;
 }
@@ -508,4 +504,10 @@ a.facebook {
 .glyphicon-menu-left {
     font-size: 30px;
     margin-top: 10px;
+}
+
+.search-user {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 30px;
 }

@@ -13,6 +13,7 @@ passport.deserializeUser(deserializeUser);
 app.get('/api/project/user', findUsers);
 app.post('/api/project/user', createUser);
 app.get('/api/project/user/:userId', findUserById);
+app.get('/api/project/searchUser', findUserByFirstName);
 app.put('/api/project/user/:userId', updateUser);
 app.delete('/api/project/user/:userId', deleteUser);
 app.put('/api/project/user/:userId/restaurant/like/:resId', likeRestaurant);
@@ -139,6 +140,18 @@ function findUserById(req, res) {
             res.json(user);
         }, function (err) {
            res.sendStatus(404);
+        });
+}
+
+function findUserByFirstName(req, res) {
+    var firstName = req.query.firstName;
+
+    userModel
+        .findUserByFirstName(firstName)
+        .then(function (users) {
+            res.json(users);
+        }, function (err) {
+            res.sendStatus(404);
         });
 }
 

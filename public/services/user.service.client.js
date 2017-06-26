@@ -10,6 +10,7 @@
            "findUserByUsername"    : findUserByUsername,
            "findUserByCredentials" : findUserByCredentials,
            "findUserById"          : findUserById,
+           "findUserByFirstName"   : findUserByFirstName,
            "updateUser"            : updateUser,
            "deleteUser"            : deleteUser,
            "login"                 : login,
@@ -53,6 +54,14 @@
 
        function findUserByCredentials(username, password) {
            var url = "/api/project/user?username=" +username+ "&password=" +password;
+           return $http.get(url)
+               .then(function (response) {
+                  return response.data;
+               });
+       }
+
+       function findUserByFirstName(name) {
+           var url = "/api/project/searchUser?firstName=" +name;
            return $http.get(url)
                .then(function (response) {
                   return response.data;

@@ -41,7 +41,7 @@
 
                     for(var r in reviewId) {
                         restaurantService
-                            .findRestaurantReviewById(reviewId[r]._id)
+                            .findRestaurantReviewById(reviewId[r])
                             .then(function (reviews) {
                                userReviews.push(reviews);
                             });

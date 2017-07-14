@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var restaurantSchema = require('../restaurant/restaurant.schema.server');
 
 var userSchema = mongoose.Schema({
     firstName : String,
@@ -28,7 +27,7 @@ var userSchema = mongoose.Schema({
     followers: [String],
     following: [String],
     visited : [String],
-    reviews : [restaurantSchema],
+    reviews : [{type: mongoose.Schema.Types.ObjectId, ref: "restaurantModel"}],
     dateCreated : {type : Date, default: Date.now}
 }, {collection : "users"});
 

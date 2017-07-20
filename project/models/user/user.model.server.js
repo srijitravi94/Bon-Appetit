@@ -75,7 +75,13 @@ function findUserById(userId) {
 
 function findUserByFirstName(firstName) {
     return userModel
-        .find({firstName : firstName});
+        .find({$or :
+            [
+            {"username" : {$regex : ".*" +firstName+ ".*"}},
+            {"firstName" : {$regex : ".*" +firstName+ ".*"}},
+            {"lastName" : {$regex : ".*" +firstName+ ".*"}}
+            ]
+        });
 }
 
 function updateUser(user, userId) {

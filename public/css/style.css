@@ -257,6 +257,7 @@ a.location-title {
 
 .location-collection-image {
     width: 100%;
+    height: 300px;
 }
 
 /*Restaurants inside a collection*/
